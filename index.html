@@ -8,24 +8,23 @@
 </head>
 <body>
 
-    <header>
+    <div class="container">
         <h1>ConvTool</h1>
-        <p>간단하고 빠른 이미지 변환 도구</p>
-    </header>
+        <p class="subtitle">간단하고 빠른 이미지 변환 도구</p>
 
-    <main>
-        <section class="tool-section">
-            <h2>PNG → JPG 변환</h2>
-            <button class="tool-btn" id="pngToJpgBtn">이미지 선택하기</button>
-            <input type="file" id="pngInput" accept="image/png" style="display:none;">
-            <p id="resultMessage"></p>
-        </section>
-    </main>
+        <h2 class="tool-title">PNG → JPG 변환</h2>
+
+        <button id="pngToJpgBtn" class="button">이미지 선택하기</button>
+        <input type="file" id="pngInput" accept="image/png" style="display:none">
+
+        <p id="resultMessage" class="result"></p>
+    </div>
 
     <footer>
-        <p>© 2025 ConvTool. All rights reserved.</p>
+        © 2025 ConvTool. All rights reserved.
     </footer>
 
     <script src="js/main.js"></script>
+
 </body>
 </html>
