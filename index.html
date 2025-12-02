@@ -3,25 +3,121 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ConvTool</title>
-    <link rel="stylesheet" href="style.css">
+    <title>ConvTool - 이미지 변환 도구</title>
+
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Noto Sans KR', sans-serif;
+            background: #f7f8fc;
+            color: #333;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+        }
+
+        h1 {
+            font-size: 36px;
+            margin-bottom: 10px;
+            font-weight: 700;
+            color: #444;
+        }
+
+        p.subtitle {
+            color: #666;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+            padding: 20px;
+            display: grid;
+            gap: 20px;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        }
+
+        .tool-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+            text-align: center;
+            transition: 0.25s;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        .tool-card h3 {
+            margin-bottom: 12px;
+            font-size: 20px;
+            color: #555;
+        }
+
+        .tool-btn {
+            margin-top: 10px;
+            padding: 12px 18px;
+            background: #b5d5ff;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 15px;
+            font-weight: 600;
+            transition: 0.2s;
+        }
+
+        .tool-btn:hover {
+            background: #9cc8ff;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            color: #777;
+            font-size: 14px;
+        }
+    </style>
 </head>
 <body>
 
     <header>
         <h1>ConvTool</h1>
-        <p>간단하고 빠른 이미지 변환 도구</p>
+        <p class="subtitle">간단하고 빠른 이미지 변환 도구</p>
     </header>
 
-    <main class="container">
-        <a href="#" class="tool-btn">PNG → JPG</a>
-        <a href="#" class="tool-btn">PNG → WEBP</a>
-        <a href="#" class="tool-btn">이미지 리사이즈</a>
-        <a href="#" class="tool-btn">이미지 → PDF</a>
-    </main>
+    <div class="container">
+
+        <div class="tool-card">
+            <h3>PNG → JPG</h3>
+            <button class="tool-btn" onclick="alert('PNG → JPG 준비중!')">변환하기</button>
+        </div>
+
+        <div class="tool-card">
+            <h3>PNG → WEBP</h3>
+            <button class="tool-btn" onclick="alert('PNG → WEBP 준비중!')">변환하기</button>
+        </div>
+
+        <div class="tool-card">
+            <h3>이미지 리사이즈</h3>
+            <button class="tool-btn" onclick="alert('이미지 리사이즈 준비중!')">변환하기</button>
+        </div>
+
+        <div class="tool-card">
+            <h3>이미지 → PDF</h3>
+            <button class="tool-btn" onclick="alert('PDF 변환 준비중!')">변환하기</button>
+        </div>
+
+    </div>
 
     <footer>
-        <p>© 2025 ConvTool. All rights reserved.</p>
+        © 2025 ConvTool. All rights reserved.
     </footer>
 
 </body>
