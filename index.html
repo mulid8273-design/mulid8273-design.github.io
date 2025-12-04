@@ -25,33 +25,33 @@
 
   <main class="container main-grid">
 
-    <!-- Convert Tab -->
+    <!-- 변환 탭 -->
     <section id="convert" class="tab-panel">
       <h2>포맷 변환</h2>
       <div class="card-grid">
 
         <div class="card">
           <h3>PNG → JPG</h3>
-          <input type="file" accept="image/png" class="file-input" data-action="pngToJpg">
+          <input type="file" accept="image/png" data-action="pngToJpg" class="file-input">
           <button class="btn primary" data-action-button="pngToJpg">변환</button>
         </div>
 
         <div class="card">
           <h3>PNG → WEBP</h3>
-          <input type="file" accept="image/png" class="file-input" data-action="pngToWebp">
+          <input type="file" accept="image/png" data-action="pngToWebp" class="file-input">
           <button class="btn primary" data-action-button="pngToWebp">변환</button>
         </div>
 
         <div class="card">
           <h3>HEIC → JPG</h3>
-          <input type="file" accept=".heic,.heif,image/heic,image/heif" class="file-input" data-action="heicToJpg">
+          <input type="file" accept=".heic,.heif,image/heic,image/heif" data-action="heicToJpg" class="file-input">
           <button class="btn primary" data-action-button="heicToJpg">변환</button>
         </div>
 
         <div class="card">
-          <h3>PNG / JPG → 압축</h3>
-          <input type="file" accept="image/*" class="file-input" data-action="compress">
-          <label>품질: 
+          <h3>PNG / JPG 압축</h3>
+          <input type="file" accept="image/*" data-action="compress" class="file-input">
+          <label>품질:
             <input type="range" min="0.1" max="1" step="0.1" value="0.8" data-quality>
           </label>
           <button class="btn primary" data-action-button="compress">압축</button>
@@ -60,64 +60,45 @@
       </div>
     </section>
 
-    <!-- Edit Tab -->
+    <!-- 편집 탭 -->
     <section id="edit" class="tab-panel hidden">
       <h2>이미지 편집</h2>
       <div class="card-grid">
 
         <div class="card">
-          <h3>이미지 리사이즈</h3>
-          <input type="file" accept="image/*" class="file-input" data-action="resize">
+          <h3>리사이즈</h3>
+          <input type="file" accept="image/*" data-action="resize" class="file-input">
           <input type="number" placeholder="너비(px)" data-width>
           <input type="number" placeholder="높이(px)" data-height>
           <button class="btn primary" data-action-button="resize">리사이즈</button>
         </div>
 
-        <div class="card">
-          <h3>이미지 크롭</h3>
-          <input type="file" accept="image/*" class="file-input" data-action="crop">
-          <button class="btn primary" data-action-button="crop">열기</button>
-        </div>
-
       </div>
     </section>
 
-    <!-- PDF Tab -->
+    <!-- PDF 탭 -->
     <section id="pdf" class="tab-panel hidden">
       <h2>PDF 도구</h2>
       <div class="card-grid">
 
         <div class="card">
           <h3>이미지 → PDF</h3>
-          <input type="file" accept="image/*" class="file-input" multiple data-action="imagesToPdf">
-          <button class="btn primary" data-action-button="imagesToPdf">PDF 만들기</button>
-        </div>
-
-        <div class="card">
-          <h3>PDF 병합(간단)</h3>
-          <input type="file" accept="application/pdf" class="file-input" multiple data-action="pdfMerge">
-          <button class="btn primary" data-action-button="pdfMerge">병합</button>
+          <input type="file" accept="image/*" multiple data-action="imagesToPdf" class="file-input">
+          <button class="btn primary" data-action-button="imagesToPdf">PDF 생성</button>
         </div>
 
       </div>
     </section>
 
-    <!-- More Tab -->
+    <!-- 더보기 탭 -->
     <section id="more" class="tab-panel hidden">
       <h2>더보기</h2>
       <div class="card-grid">
 
         <div class="card">
-          <h3>Base64 ↔ 이미지</h3>
-          <textarea id="base64area" placeholder="여기에 Base64 붙여넣기"></textarea>
-          <button class="btn" id="b64toimg">Base64 → 이미지</button>
-          <button class="btn" id="imgtob64">이미지 → Base64</button>
-        </div>
-
-        <div class="card">
           <h3>EXIF 제거</h3>
-          <input type="file" accept="image/*" class="file-input" data-action="stripExif">
-          <button class="btn primary" data-action-button="stripExif">EXIF 제거</button>
+          <input type="file" accept="image/*" data-action="stripExif" class="file-input">
+          <button class="btn primary" data-action-button="stripExif">제거</button>
         </div>
 
       </div>
@@ -133,7 +114,7 @@
 
   <script src="main.js"></script>
   <script>
-    document.getElementById('year').textContent = new Date().getFullYear();
+    document.getElementById("year").textContent = new Date().getFullYear();
   </script>
 </body>
 </html>
