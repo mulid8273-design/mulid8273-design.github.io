@@ -1,174 +1,144 @@
-/* 탭 전환 */
+// 탭 이동
 document.querySelectorAll(".nav-btn").forEach(btn => {
   btn.addEventListener("click", () => {
     document.querySelectorAll(".nav-btn").forEach(b => b.classList.remove("active"));
     btn.classList.add("active");
 
-    const tab = btn.dataset.tab;
-    document.querySelectorAll(".tab-panel").forEach(sec => sec.classList.add("hidden"));
-    document.getElementById(tab).classList.remove("hidden");
+    document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.add("hidden"));
+    document.getElementById(btn.dataset.tool).classList.remove("hidden");
   });
 });
 
-/* 파일 선택 핸들러 */
-function getFile(input) {
-  return input.files && input.files[0] ? input.files[0] : null;
+// 공통 캔버스 변환 함수
+function loadImage(file) {
+  return new Promise(resolve => {
+    const img = new Image();
+    img.onload = () => resolve(img);
+    img.src = URL.createObjectURL(file);
+  });
 }
 
-/* PNG → JPG */
+async function convertImage(file, format, quality = 1) {
+  const img = await loadImage(file);
+  const canvas = document.createElement("canvas");
+  canvas.width = img.width;
+  canvas.height = img.height;
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(img, 0, 0);
+
+  return new Promise(resolve => {
+    canvas.toBlob(
+      blob => resolve(blob),
+      format,
+      quality
+    );
+  });
+}
+
+// PNG → JPG
 async function pngToJpg(file) {
-  const img = await createImageBitmap(file);
-  const canvas = new OffscreenCanvas(img.width, img.height);
-  const ctx = canvas.getContext("2d");
-  ctx.fillStyle = "#fff";
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
-  ctx.drawImage(img, 0, 0);
-
-  const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.92 });
-  downloadBlob(blob, file.name.replace(".png", ".jpg"));
+  const blob = await convertImage(file, "image/jpeg", 0.92);
+  downloadBlob(blob, file.name.replace(/\.png$/i, ".jpg"));
 }
 
-/* PNG → WEBP */
+// PNG → WEBP
 async function pngToWebp(file) {
-  const img = await createImageBitmap(file);
-  const canvas = new OffscreenCanvas(img.width, img.height);
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-  const blob = await canvas.convertToBlob({ type: "image/webp", quality: 0.9 });
-  downloadBlob(blob, file.name.replace(".png", ".webp"));
+  const blob = await convertImage(file, "image/webp", 0.92);
+  downloadBlob(blob, file.name.replace(/\.png$/i, ".webp"));
 }
 
-/* HEIC → JPG */
+// HEIC → JPG
 async function heicToJpg(file) {
   const blob = await heic2any({ blob: file, toType: "image/jpeg" });
-  downloadBlob(blob, file.name.replace(".heic", ".jpg"));
+  downloadBlob(blob, file.name.replace(/\.\w+$/, ".jpg"));
 }
 
-/* 압축 */
-async function compress(file, q) {
-  const img = await createImageBitmap(file);
-  const canvas = new OffscreenCanvas(img.width, img.height);
+// 이미지 압축
+async function compress(file, quality) {
+  const blob = await convertImage(file, "image/jpeg", quality);
+  downloadBlob(blob, file.name.replace(/\.\w+$/, "_compressed.jpg"));
+}
+
+// 이미지 리사이즈
+async function resize(file, width, height) {
+  const img = await loadImage(file);
+  const canvas = document.createElement("canvas");
+  canvas.width = width;
+  canvas.height = height;
   const ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-  const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: q });
-  downloadBlob(blob, "compressed.jpg");
+  ctx.drawImage(img, 0, 0, width, height);
+  canvas.toBlob(blob => downloadBlob(blob, file.name.replace(/\.\w+$/, "_resized.jpg")), "image/jpeg");
 }
 
-/* 리사이즈 */
-async function resize(file, w, h) {
-  const img = await createImageBitmap(file);
-  const canvas = new OffscreenCanvas(w, h);
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0, w, h);
-  const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.92 });
-  downloadBlob(blob, "resized.jpg");
-}
-
-/* 이미지 → PDF */
+// 이미지 → PDF
 async function imagesToPdf(files) {
-  const pdf = new window.jspdf.jsPDF();
-  let first = true;
+  const { jsPDF } = window.jspdf;
+  const pdf = new jsPDF();
 
-  for (const file of files) {
-    const img = await fileToBase64(file);
-    if (!first) pdf.addPage();
-    first = false;
-    pdf.addImage(img, "JPEG", 10, 10, 190, 0);
+  for (let i = 0; i < files.length; i++) {
+    const img = await loadImage(files[i]);
+    const imgData = await imageToDataURL(files[i]);
+
+    if (i > 0) pdf.addPage();
+    pdf.addImage(imgData, "JPEG", 0, 0, 210, 297);
   }
-  pdf.save("images.pdf");
+  pdf.save("converted.pdf");
 }
 
-/* PDF 병합(간단) */
+function imageToDataURL(file) {
+  return new Promise(resolve => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.readAsDataURL(file);
+  });
+}
+
+// PDF 병합 (간단)
 async function pdfMerge(files) {
-  // 매우 단순한 병합 (1개 PDF로 페이지 추가)
-  const pdf = new window.jspdf.jsPDF();
-  let first = true;
-
-  for (const file of files) {
-    const buf = await file.arrayBuffer();
-    const src = await pdf.loadFile(buf);
-
-    src.getPages().forEach((p, idx) => {
-      if (!first || idx > 0) pdf.addPage();
-      pdf.addImage(p, "JPEG", 10, 10, 190, 0);
-    });
-
-    first = false;
-  }
-
-  pdf.save("merged.pdf");
+  alert("간단 병합은 브라우저 단독으로 불완전할 수 있어요.\n정식 버전은 서버 필요!");
 }
 
-/* EXIF 제거 */
+// EXIF 제거
 async function stripExif(file) {
-  const img = await createImageBitmap(file);
-  const canvas = new OffscreenCanvas(img.width, img.height);
-  const ctx = canvas.getContext("2d");
-  ctx.drawImage(img, 0, 0);
-  const blob = await canvas.convertToBlob({ type: "image/jpeg", quality: 0.92 });
-  downloadBlob(blob, "no_exif.jpg");
+  const blob = await convertImage(file, "image/jpeg", 1);
+  downloadBlob(blob, file.name.replace(/\.\w+$/, "_clean.jpg"));
 }
 
-/* Base64 ↔ 이미지 */
-document.getElementById("b64toimg").onclick = () => {
-  const txt = document.getElementById("b64area").value;
-  const a = document.createElement("a");
-  a.href = txt;
-  a.download = "image.png";
-  a.click();
-};
-
-document.getElementById("imgtob64").onclick = async () => {
-  const input = document.createElement("input");
-  input.type = "file";
-  input.accept = "image/*";
-  input.onchange = async () => {
-    const file = input.files[0];
-    const b64 = await fileToBase64(file);
-    document.getElementById("b64area").value = b64;
-  };
-  input.click();
-};
-
-/* 도우미 */
-function downloadBlob(blob, name) {
+// Blob 다운로드
+function downloadBlob(blob, filename) {
   const url = URL.createObjectURL(blob);
   const a = document.createElement("a");
   a.href = url;
-  a.download = name;
+  a.download = filename;
   a.click();
   URL.revokeObjectURL(url);
 }
 
-function fileToBase64(file) {
-  return new Promise(res => {
-    const r = new FileReader();
-    r.onload = () => res(r.result);
-    r.readAsDataURL(file);
-  });
-}
-
-/* 실행 버튼 연결 */
-document.querySelectorAll("[data-run]").forEach(btn => {
+// 버튼 이벤트 연결
+document.querySelectorAll("[data-action-button]").forEach(btn => {
   btn.addEventListener("click", async () => {
-    const action = btn.dataset.run;
-    const card = btn.closest(".card");
-    const input = card.querySelector("input[type=file]");
-    const file = input.multiple ? [...input.files] : getFile(input);
+    const action = btn.dataset.actionButton;
+    const input = document.querySelector(`[data-action="${action}"]`);
+    const file = input?.files?.[0];
+    const files = input?.files;
 
-    const q = card.querySelector("[data-quality]")?.value;
-    const w = card.querySelector("[data-width]")?.value;
-    const h = card.querySelector("[data-height]")?.value;
+    if (!file && action !== "imagesToPdf" && action !== "pdfMerge") {
+      alert("파일을 선택해주세요");
+      return;
+    }
 
-    if (!file) return alert("파일을 선택하세요.");
+    const quality = document.querySelector("[data-quality]")?.value;
 
-    if (action === "pngToJpg") pngToJpg(file);
-    if (action === "pngToWebp") pngToWebp(file);
-    if (action === "heicToJpg") heicToJpg(file);
-    if (action === "compress") compress(file, q);
-    if (action === "resize") resize(file, Number(w), Number(h));
-    if (action === "imagesToPdf") imagesToPdf(file);
-    if (action === "pdfMerge") pdfMerge(file);
-    if (action === "stripExif") stripExif(file);
+    if (action === "resize") {
+      const width = Number(document.querySelector("[data-width]").value);
+      const height = Number(document.querySelector("[data-height]").value);
+      resize(file, width, height);
+    } else if (action === "pngToJpg") pngToJpg(file);
+    else if (action === "pngToWebp") pngToWebp(file);
+    else if (action === "heicToJpg") heicToJpg(file);
+    else if (action === "compress") compress(file, quality);
+    else if (action === "imagesToPdf") imagesToPdf(files);
+    else if (action === "pdfMerge") pdfMerge(files);
+    else if (action === "stripExif") stripExif(file);
   });
 });
