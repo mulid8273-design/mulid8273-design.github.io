@@ -1,3 +1,4 @@
+# robots.txt - 모든 검색엔진 허용, sitemap 위치 지정
 User-agent: *
 Allow: /
 
