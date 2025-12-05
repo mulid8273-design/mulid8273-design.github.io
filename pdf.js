@@ -1,38 +1,26 @@
-// pdf.js
 document.getElementById("pdfConvertBtn").addEventListener("click", async () => {
   const file = document.getElementById("pdfInput").files[0];
-  if(!file){ alert("파일 선택 필요"); return; }
+  if(!file){
+    alert("파일을 선택해주세요!");
+    return;
+  }
 
+  // 브라우저 내 PDF 변환 안정화: 2MB 이하 권장
+  if(file.size > 2 * 1024 * 1024){
+    alert("브라우저에서는 2MB 이하 PPT/PDF 파일만 안정적으로 변환 가능합니다.");
+    return;
+  }
+
+  // PDF.js 사용 (브라우저 내 PDF 처리)
   const reader = new FileReader();
-  reader.onload = (e)=>{
-    const { jsPDF } = window.jspdf;
-    const pdf = new jsPDF({ unit:'pt', format:'a4' });
-
-    if(file.type.startsWith('image/')){
-      const img = new Image();
-      img.src = e.target.result;
-      img.onload = ()=>{
-        const ratio = Math.min(595/img.width, 842/img.height);
-        pdf.addImage(img,'PNG',0,0,img.width*ratio,img.height*ratio);
-        const link = document.getElementById("pdfDownload");
-        link.href = pdf.output('bloburl');
-        link.download = `converted_${file.name.split('.')[0]}.pdf`;
-        link.style.display = 'inline';
-        link.textContent = '다운로드';
-      };
-    } else if(file.type === 'application/pdf'){
-      const blob = new Blob([e.target.result], { type: 'application/pdf' });
-      const url = URL.createObjectURL(blob);
-      const link = document.getElementById("pdfDownload");
-      link.href = url;
-      link.download = file.name;
-      link.style.display = 'inline';
-      link.textContent = '다운로드';
-    } else {
-      alert("지원하지 않는 파일 형식");
-    }
+  reader.onload = function(e){
+    const blob = new Blob([e.target.result], {type:"application/pdf"});
+    const url = URL.createObjectURL(blob);
+    const link = document.getElementById("pdfDownload");
+    link.href = url;
+    link.download = `converted_${file.name.split('.')[0]}.pdf`;
+    link.style.display = 'inline';
+    link.textContent = '다운로드';
   };
-
-  if(file.type.startsWith('image/')) reader.readAsDataURL(file);
-  else reader.readAsArrayBuffer(file);
+  reader.readAsArrayBuffer(file);
 });
