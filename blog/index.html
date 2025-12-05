@@ -1,35 +1,27 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8">
-  <title>ConvTool 블로그</title>
-  <meta name="description" content="ConvTool 업데이트, 공지사항, 기능 추가 안내를 확인하세요.">
-  <link rel="stylesheet" href="blog.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="index,follow">
+<title>MULID 이미지 변환기 블로그</title>
+<link rel="stylesheet" href="blog.css">
 </head>
-
 <body>
-<header class="blog-header">
-  <h1>ConvTool 블로그</h1>
-  <p>업데이트 · 기능추가 · 공지사항</p>
+<header>
+  <h1>블로그</h1>
+  <nav>
+    <a href="../index.html">홈</a>
+  </nav>
 </header>
-
-<main class="blog-container">
-  <ul id="post-list" class="post-list"></ul>
+<main>
+<h2>블로그 글 목록</h2>
+<ul>
+  <li><a href="first-update.html">[업데이트] 이미지 변환 속도 개선</a></li>
+</ul>
 </main>
-
-<script>
-const posts = [
-  { title: "[업데이트] 이미지 변환 속도 개선", url: "first-update.html", date: "2025-02-02" },
-  { title: "2025년 2월 기능 업데이트", url: "updates-2025-02.html", date: "2025-02-10" }
-];
-
-const list = document.getElementById("post-list");
-posts.sort((a,b)=> new Date(b.date) - new Date(a.date));
-posts.forEach(p => {
-  const li = document.createElement("li");
-  li.innerHTML = `<a href="${p.url}"><h3>${p.title}</h3><time>${p.date}</time></a>`;
-  list.appendChild(li);
-});
-</script>
+<footer>
+<small>© 2025 MULID DESIGN</small>
+</footer>
 </body>
 </html>
