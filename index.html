@@ -1,208 +1,58 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>이미지 변환기 · PNG, JPG, WEBP 변환</title>
 
-  <title>ConvTool — All-in-one Image Toolkit</title>
+<link rel="stylesheet" href="style.css">
 
-  <!-- SEO 최적화 설명 -->
-  <meta name="description" content="PNG JPG 변환, WEBP 변환, 이미지 압축, 리사이즈, 이미지 PDF 변환 등 모든 기능을 브라우저에서 직접 처리하는 무료 이미지 도구 ConvTool. 파일을 서버에 업로드하지 않아 안전합니다.">
+<!-- SEO -->
+<meta name="description" content="PNG, JPG, WEBP 이미지 변환기. 빠르고 간단한 무료 온라인 이미지 변환 서비스.">
+<link rel="canonical" href="https://mulid8273-design.github.io/">
 
-  <!-- Open Graph / SNS -->
-  <meta property="og:title" content="ConvTool — All-in-one Image Toolkit">
-  <meta property="og:description" content="브라우저에서 직접 처리하는 무료 이미지 도구 — 변환, 압축, 리사이즈, PDF 변환 등.">
-  <meta property="og:type" content="website">
-  <meta property="og:locale" content="ko_KR">
+<!-- OpenGraph -->
+<meta property="og:title" content="이미지 변환기">
+<meta property="og:description" content="PNG, JPG, WEBP 이미지 변환 사이트">
+<meta property="og:type" content="website">
 
-  <link rel="stylesheet" href="style.css">
-  <!-- heic2any 라이브러리 (HEIC 변환 지원) -->
-  <script src="https://unpkg.com/heic2any/dist/heic2any.min.js" defer></script>
-
-  <style>
-    /* 경미한 폴백 스타일 (필요 시 삭제) */
-    .hidden { display: none; }
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 16px; }
-    .nav { display:flex; gap:8px; }
-    .nav-btn.active { font-weight:700; }
-    .card-grid { display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-    input[type="file"] { width:100%; }
-    textarea#base64area { width:100%; height:120px; }
-  </style>
 </head>
-
 <body>
-  <header class="site-header" role="banner">
-    <div class="container">
-      <h1 class="logo">ConvTool</h1>
-      <nav class="nav" role="navigation" aria-label="주요 도구">
-        <button data-tool="convert" class="nav-btn active" aria-pressed="true">변환</button>
-        <button data-tool="edit" class="nav-btn" aria-pressed="false">편집</button>
-        <button data-tool="pdf" class="nav-btn" aria-pressed="false">PDF</button>
-        <button data-tool="more" class="nav-btn" aria-pressed="false">더보기</button>
-      </nav>
-    </div>
-  </header>
 
-  <main class="container main-grid" role="main" id="main">
+<header>
+    <h1>이미지 변환기</h1>
+    <p>PNG, JPG, WEBP 변환을 빠르게</p>
+</header>
 
-    <!-- Convert -->
-    <section id="convert" class="tab-panel" aria-labelledby="convert-heading">
-      <h2 id="convert-heading">포맷 변환</h2>
-      <div class="card-grid">
+<section>
+    <h2>이미지 변환 기능</h2>
+    <p>아래에서 이미지를 업로드하거나 변환 기능을 이용하세요.</p>
+</section>
 
-        <div class="card pastel" aria-label="PNG to JPG">
-          <h3>PNG → JPG</h3>
-          <input type="file" accept="image/png" class="file-input single" data-action="pngToJpg" aria-label="PNG 파일 선택">
-          <button class="btn primary" data-action-button="pngToJpg">변환</button>
-        </div>
+<!-- 변환 기능 JS -->
+<script src="main.js"></script>
 
-        <div class="card pastel" aria-label="PNG to WEBP">
-          <h3>PNG → WEBP</h3>
-          <input type="file" accept="image/png" class="file-input single" data-action="pngToWebp" aria-label="PNG 파일 선택">
-          <button class="btn primary" data-action-button="pngToWebp">변환</button>
-        </div>
+<hr>
 
-        <div class="card pastel" aria-label="HEIC to JPG">
-          <h3>HEIC → JPG</h3>
-          <input type="file" accept=".heic,.heif,image/heic,image/heif" class="file-input single" data-action="heicToJpg" aria-label="HEIC 파일 선택">
-          <button class="btn primary" data-action-button="heicToJpg">변환</button>
-        </div>
+<section>
+    <h2>업데이트 & 블로그</h2>
+    <ul>
+        <li><a href="blog/">블로그 목록</a></li>
+        <li><a href="first-update.html">[업데이트] 이미지 변환 속도 개선</a></li>
+        <li><a href="updates-2025-02.html">2025년 2월 업데이트</a></li>
+    </ul>
+</section>
 
-        <div class="card pastel" aria-label="이미지 압축">
-          <h3>PNG / JPG → 압축</h3>
-          <input type="file" accept="image/*" class="file-input single" data-action="compress" aria-label="이미지 파일 선택">
-          <label>품질:
-            <input type="range" min="0.1" max="1" step="0.1" value="0.8" data-quality aria-label="압축 품질">
-            <span class="quality-value">0.8</span>
-          </label>
-          <button class="btn primary" data-action-button="compress">압축</button>
-        </div>
+<hr>
 
-      </div>
-    </section>
+<section>
+    <h2>사이트 정보</h2>
+    <ul>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="contact.html">문의하기</a></li>
+        <li><a href="privacy.html">개인정보처리방침</a></li>
+    </ul>
+</section>
 
-    <!-- Edit -->
-    <section id="edit" class="tab-panel hidden" aria-labelledby="edit-heading">
-      <h2 id="edit-heading">이미지 편집</h2>
-      <div class="card-grid">
-
-        <div class="card pastel" aria-label="리사이즈">
-          <h3>리사이즈</h3>
-          <input type="file" accept="image/*" class="file-input single" data-action="resize" aria-label="리사이즈할 이미지 선택">
-          <input type="number" placeholder="너비(px)" data-width aria-label="너비">
-          <input type="number" placeholder="높이(px)" data-height aria-label="높이">
-          <button class="btn primary" data-action-button="resize">리사이즈</button>
-        </div>
-
-        <div class="card pastel" aria-label="크롭">
-          <h3>이미지 크롭</h3>
-          <input type="file" accept="image/*" class="file-input single" data-action="crop" aria-label="크롭할 이미지 선택">
-          <button class="btn primary" data-action-button="crop">열기</button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- PDF -->
-    <section id="pdf" class="tab-panel hidden" aria-labelledby="pdf-heading">
-      <h2 id="pdf-heading">PDF 도구</h2>
-      <div class="card-grid">
-
-        <div class="card pastel" aria-label="이미지 to PDF">
-          <h3>이미지 → PDF</h3>
-          <input type="file" accept="image/*" multiple class="file-input multi" data-action="imagesToPdf" aria-label="이미지 여러개 선택">
-          <button class="btn primary" data-action-button="imagesToPdf">PDF 만들기</button>
-        </div>
-
-        <div class="card pastel" aria-label="PDF 병합">
-          <h3>PDF 병합</h3>
-          <input type="file" accept="application/pdf" multiple class="file-input multi" data-action="pdfMerge" aria-label="PDF 여러개 선택">
-          <button class="btn primary" data-action-button="pdfMerge">병합</button>
-        </div>
-
-      </div>
-    </section>
-
-    <!-- More -->
-    <section id="more" class="tab-panel hidden" aria-labelledby="more-heading">
-      <h2 id="more-heading">더보기</h2>
-      <div class="card-grid">
-
-        <div class="card pastel" aria-label="Base64 변환">
-          <h3>Base64 변환</h3>
-          <textarea id="base64area" placeholder="Base64 입력" aria-label="Base64 입력"></textarea>
-          <div style="display:flex;gap:8px;">
-            <button class="btn" id="b64toimg">Base64 → 이미지</button>
-            <button class="btn" id="imgtob64">이미지 → Base64</button>
-          </div>
-        </div>
-
-        <div class="card pastel" aria-label="EXIF 제거">
-          <h3>EXIF 제거</h3>
-          <input type="file" accept="image/*" class="file-input single" data-action="stripExif" aria-label="EXIF 제거할 이미지 선택">
-          <button class="btn primary" data-action-button="stripExif">제거</button>
-        </div>
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer class="site-footer" role="contentinfo">
-    <div class="container">
-      <small>
-        © <span id="year"></span> mulid8273 · ConvTool |
-        <a href="privacy.html">개인정보처리방침</a> ·
-        <a href="contact.html">문의하기</a> ·
-        <a href="faq.html">FAQ</a> ·
-        <a href="sitemap.xml">사이트맵</a>
-      </small>
-    </div>
-  </footer>
-
-  <!-- 메인 스크립트(기존 main.js 사용). 없는 경우를 대비한 최소 탭 스위처 폴백 포함 -->
-  <script src="main.js" defer></script>
-  <script>
-    // 연도 자동채우기
-    document.getElementById('year').textContent = new Date().getFullYear();
-
-    // 탭 폴백: main.js가 탭 전환을 담당하지 않을 때를 대비
-    (function(){
-      const navBtns = document.querySelectorAll('.nav-btn');
-      const panels = document.querySelectorAll('.tab-panel');
-
-      function showTool(name){
-        panels.forEach(p => p.id === name ? p.classList.remove('hidden') : p.classList.add('hidden'));
-        navBtns.forEach(btn => {
-          const isActive = btn.getAttribute('data-tool') === name;
-          btn.classList.toggle('active', isActive);
-          btn.setAttribute('aria-pressed', String(isActive));
-        });
-      }
-
-      navBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-          showTool(btn.getAttribute('data-tool'));
-        });
-      });
-
-      // 초기 활성 탭 확인 (기본: convert)
-      if(!document.querySelector('.nav-btn.active')){
-        showTool('convert');
-      } else {
-        // 활성화된 버튼 기준으로 보여주기
-        const active = document.querySelector('.nav-btn.active');
-        showTool(active ? active.getAttribute('data-tool') : 'convert');
-      }
-
-      // 품질 슬라이더 값 표시
-      const qualityInput = document.querySelector('[data-quality]');
-      const qualityValue = document.querySelector('.quality-value');
-      if(qualityInput && qualityValue){
-        qualityInput.addEventListener('input', ()=> qualityValue.textContent = qualityInput.value);
-      }
-    })();
-  </script>
 </body>
 </html>
