@@ -40,11 +40,11 @@ a:hover {
   padding: 20px 0;
   box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   margin-bottom: 30px;
+  text-align: center;
 }
 
 .site-header .logo {
   font-size: 2rem;
-  text-align: center;
   font-weight: bold;
   margin-bottom: 10px;
 }
@@ -53,6 +53,7 @@ a:hover {
   display: flex;
   justify-content: center;
   gap: 20px;
+  flex-wrap: wrap;
 }
 
 .nav-btn {
@@ -163,4 +164,17 @@ a:hover {
 }
 .site-footer a {
   margin: 0 5px;
+}
+
+/* =========================
+   반응형
+========================= */
+@media (max-width: 768px) {
+  .nav {
+    flex-direction: column;
+  }
+  .nav-btn {
+    width: 100%;
+    margin-bottom: 10px;
+  }
 }
