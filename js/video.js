@@ -5,7 +5,12 @@ document.getElementById("videoConvertBtn").addEventListener("click", async () =>
     return;
   }
 
-  // ffmpeg.wasm 로 변환 코드
+  // 브라우저 변환 한계 체크 (약 3분 기준)
+  if(file.size > 150 * 1024 * 1024){ // 약 150MB 이상이면 안내
+    alert("죄송합니다. 브라우저에서는 3분 이하 영상만 변환 가능합니다.");
+    return;
+  }
+
   if(!ffmpeg.isLoaded()) await ffmpeg.load();
   ffmpeg.FS('writeFile', file.name, await fetchFile(file));
   const outputFormat = file.name.endsWith('.mp4') ? 'webm' : 'mp4';
