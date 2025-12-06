@@ -1,32 +1,46 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>영상 변환</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+// FFmpeg CDN 로드
+let ffmpegLoaded = false;
+let ffmpeg;
 
-<header>
-    <h1>영상 변환</h1>
-    <a href="index.html">← 홈으로</a>
-</header>
+async function loadFFmpeg() {
+    if (ffmpegLoaded) return;
 
-<div class="container">
-    <input type="file" id="videoInput" accept="video/*">
+    ffmpeg = FFmpeg.createFFmpeg({
+        log: true,
+        corePath: "https://unpkg.com/@ffmpeg/core@0.10.0/dist/ffmpeg-core.js"
+    });
 
-    <select id="videoFormat">
-        <option value="mp4">MP4</option>
-        <option value="webm">WEBM</option>
-        <option value="gif">GIF</option>
-    </select>
+    await ffmpeg.load();
+    ffmpegLoaded = true;
+}
 
-    <button id="videoConvertBtn">변환하기</button>
+document.getElementById("videoConvertBtn").addEventListener("click", async () => {
+    const file = document.getElementById("videoInput").files[0];
+    const format = document.getElementById("videoFormat").value;
+    const result = document.getElementById("videoResult");
 
-    <div id="videoResult"></div>
-</div>
+    if (!file) {
+        result.innerHTML = "<p style='color:red;'>영상 파일을 선택하세요.</p>";
+        return;
+    }
 
-<script src="js/video.js"></script>
-</body>
-</html>
+    await loadFFmpeg();
+
+    const inputName = "input." + file.name.split(".").pop();
+    const outputName = "output." + format;
+
+    await ffmpeg.FS("writeFile", inputName, await fetchFile(file));
+
+    // 변환 실행
+    await ffmpeg.run("-i", inputName, outputName);
+
+    const data = ffmpeg.FS("readFile", outputName);
+    const blob = new Blob([data.buffer], { type: "video/" + format });
+    const url = URL.createObjectURL(blob);
+
+    result.innerHTML = `
+        <a href="${url}" download="${outputName}" style="font-size:20px;color:blue;">
+            변환된 영상 다운로드
+        </a>
+    `;
+});
