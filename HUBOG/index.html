@@ -1,54 +1,73 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Link Style Page</title>
-    <link rel="stylesheet" href="linkfire.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MULID 링크 페이지</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background: #111;
+        color: #fff;
+        text-align: center;
+        padding: 20px;
+    }
+    h1 {
+        margin-bottom: 30px;
+        font-size: 2rem;
+    }
+    video {
+        width: 90%;
+        max-width: 600px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+    }
+    .links {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 20px;
+    }
+    .links a {
+        text-decoration: none;
+        color: #fff;
+        background: #ff3366;
+        padding: 12px 20px;
+        border-radius: 8px;
+        transition: 0.3s;
+    }
+    .links a:hover {
+        background: #ff6699;
+    }
+</style>
 </head>
 <body>
-    <div class="background"></div>
+    <h1>MULID 바로가기</h1>
 
-    <div class="container">
-        <div class="album-cover">
-            <img src="cover.jpg" alt="Album Cover">
-        </div>
-        <h1 class="title">곡 제목 - 아티스트명</h1>
+    <video id="previewVideo" controls autoplay>
+        <source src="https://www.youtube.com/embed/HtCuoRrG4Vw?autoplay=1" type="video/mp4">
+        브라우저가 video 태그를 지원하지 않습니다.
+    </video>
 
-        <div class="service-list">
-            <div class="service-item">
-                <span>Melon</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-            <div class="service-item">
-                <span>Genie</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-            <div class="service-item">
-                <span>Bugs</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-            <div class="service-item">
-                <span>FLO</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-            <div class="service-item">
-                <span>VIBE</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-            <div class="service-item">
-                <span>Apple Music</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-            <div class="service-item">
-                <span>Spotify</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-            <div class="service-item">
-                <span>YouTube</span>
-                <a href="#" class="play-btn">Play</a>
-            </div>
-        </div>
+    <div class="links" id="serviceLinks" style="display:none;">
+        <a href="https://www.youtube.com/watch?v=HtCuoRrG4Vw" target="_blank">YouTube</a>
+        <a href="https://music.bugs.co.kr/album/20701451" target="_blank">벅스</a>
+        <a href="https://www.genie.co.kr/detail/songInfo?xgnm=108928610" target="_blank">지니뮤직</a>
+        <a href="https://vibe.naver.com/track/89148666" target="_blank">VIBE</a>
+        <a href="https://www.melon.com/album/detail.htm?albumId=11708544" target="_blank">멜론</a>
     </div>
+
+<script>
+    const video = document.getElementById('previewVideo');
+    const links = document.getElementById('serviceLinks');
+
+    // 15초 미리보기 후 링크 표시
+    video.addEventListener('timeupdate', () => {
+        if(video.currentTime >= 15) {
+            video.pause();
+            links.style.display = 'flex';
+        }
+    });
+</script>
 </body>
 </html>
