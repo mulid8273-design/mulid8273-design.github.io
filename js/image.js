@@ -1,41 +1,39 @@
-document.getElementById("convertBtn").addEventListener("click", () => {
-    const file = document.getElementById("imgInput").files[0];
-    const format = document.getElementById("imgFormat").value;
-    const result = document.getElementById("result");
+import { $, downloadFile } from "./main.js";
 
-    if (!file) {
-        result.innerHTML = "<p style='color:red;'>파일을 선택하세요.</p>";
-        return;
-    }
+const input = $("imgInput");
+const format = $("imgFormat");
+const convertBtn = $("convertBtn");
+const result = $("result");
 
-    const img = new Image();
-    const reader = new FileReader();
+convertBtn.addEventListener("click", async () => {
+  if (!input.files.length) {
+    result.textContent = "이미지를 선택하세요.";
+    return;
+  }
 
-    reader.onload = e => {
-        img.src = e.target.result;
-        img.onload = () => {
-            const canvas = document.createElement("canvas");
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext("2d");
-            ctx.drawImage(img, 0, 0);
+  const file = input.files[0];
+  const target = format.value;
 
-            canvas.toBlob(
-                blob => {
-                    const url = URL.createObjectURL(blob);
+  result.textContent = "변환 중...";
 
-                    result.innerHTML = `
-                        <a href="${url}" download="converted.${format}" 
-                           style="font-size:20px;color:blue;">
-                           변환된 이미지 다운로드
-                        </a>
-                    `;
-                },
-                "image/" + format,
-                0.92
-            );
-        };
-    };
+  const img = new Image();
+  img.src = URL.createObjectURL(file);
 
-    reader.readAsDataURL(file);
+  img.onload = () => {
+    const canvas = document.createElement("canvas");
+    canvas.width = img.naturalWidth;
+    canvas.height = img.naturalHeight;
+
+    const ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+
+    canvas.toBlob(
+      (blob) => {
+        downloadFile(blob, `converted.${target}`);
+        result.textContent = "변환 완료!";
+      },
+      `image/${target}`,
+      0.92
+    );
+  };
 });
