@@ -1,31 +1,53 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>파일 변환</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+document.getElementById("fileConvertBtn").addEventListener("click", async () => {
+    const file = document.getElementById("fileInput").files[0];
+    const format = document.getElementById("fileFormat").value;
+    const result = document.getElementById("fileResult");
 
-<header>
-    <h1>파일 변환</h1>
-    <a href="index.html">← 홈으로</a>
-</header>
+    if (!file) {
+        result.innerHTML = "<p style='color:red;'>파일을 선택하세요.</p>";
+        return;
+    }
 
-<div class="container">
-    <input type="file" id="fileInput">
+    if (format === "txt") {
+        // PDF → TXT
+        const reader = new FileReader();
+        reader.onload = async e => {
 
-    <select id="fileFormat">
-        <option value="txt">TXT로 변환</option>
-        <option value="pdf">PDF로 변환</option>
-    </select>
+            // PDF.js 사용
+            const pdf = await pdfjsLib.getDocument({ data: e.target.result }).promise;
+            let text = "";
 
-    <button id="fileConvertBtn">변환하기</button>
+            for (let i = 1; i <= pdf.numPages; i++) {
+                const page = await pdf.getPage(i);
+                const content = await page.getTextContent();
+                text += content.items.map(t => t.str).join(" ") + "\n\n";
+            }
 
-    <div id="fileResult"></div>
-</div>
+            const blob = new Blob([text], { type: "text/plain" });
+            const url = URL.createObjectURL(blob);
 
-<script src="js/pdf.js"></script>
-</body>
-</html>
+            result.innerHTML = `<a href="${url}" download="converted.txt">TXT 다운로드</a>`;
+        };
+        reader.readAsArrayBuffer(file);
+    }
+
+    if (format === "pdf") {
+        // TXT → PDF (jsPDF 사용)
+        const reader = new FileReader();
+        reader.onload = () => {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+            const lines = reader.result.split("\n");
+
+            let y = 10;
+            lines.forEach(line => {
+                doc.text(line, 10, y);
+                y += 7;
+            });
+
+            doc.save("converted.pdf");
+        };
+
+        reader.readAsText(file);
+    }
+});
