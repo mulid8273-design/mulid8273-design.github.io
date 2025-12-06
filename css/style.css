@@ -1,14 +1,116 @@
-body { font-family: 'Segoe UI', sans-serif; background: #f9f9f9; margin:0; padding:0; color:#333; }
-header { background:#4a90e2; color:white; padding:20px 0; text-align:center; }
-header h1 { margin:0; font-size:2rem; }
-nav a { color:white; text-decoration:none; margin:0 10px; font-weight:bold; }
-nav a:hover { text-decoration:underline; }
-main { max-width:900px; margin:30px auto; padding:0 20px; }
-section { background:white; padding:20px; margin-bottom:20px; border-radius:12px; box-shadow:0 4px 8px rgba(0,0,0,0.1); }
-section h2 { margin-top:0; color:#4a90e2; }
-input[type="file"] { margin-bottom:10px; }
-button { background:#4a90e2; color:white; border:none; padding:10px 20px; margin-right:10px; border-radius:8px; cursor:pointer; font-weight:bold; }
-button:hover { background:#357ABD; }
-a.download-btn { background:#50E3C2; color:white; padding:10px 20px; border-radius:8px; text-decoration:none; font-weight:bold; }
-a.download-btn:hover { background:#3CB89D; }
-footer { text-align:center; padding:15px 0; background:#f1f1f1; margin-top:30px; color:#777; }
+/* =========================
+   MULID 변환 사이트 - 기본 스타일 (프로 기초)
+   ========================= */
+
+:root{
+  --bg:#0f1724;
+  --card:#0b1220;
+  --muted:#94a3b8;
+  --accent:#3b82f6;
+  --glass: rgba(255,255,255,0.04);
+  --radius:14px;
+  --max-width:1100px;
+  --container-padding:24px;
+  --text:#e6eef8;
+}
+
+/* 기본 리셋 */
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: linear-gradient(180deg,#071025 0%, #07172a 60%);
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  line-height:1.45;
+}
+
+/* 페이지 래퍼 */
+.wrapper{
+  max-width:var(--max-width);
+  margin:28px auto;
+  padding:var(--container-padding);
+}
+
+/* Header / Nav */
+.header{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:16px;
+  margin-bottom:18px;
+}
+.brand{
+  display:flex;
+  gap:12px;
+  align-items:center;
+}
+.brand .logo{
+  width:46px;height:46px;border-radius:10px;background:linear-gradient(135deg,var(--accent),#7c3aed);
+  display:flex;align-items:center;justify-content:center;font-weight:700;color:white;font-size:18px;
+  box-shadow:0 6px 20px rgba(59,130,246,0.12);
+}
+.brand h1{font-size:18px;letter-spacing:0.2px;}
+.nav{
+  display:flex;gap:12px;align-items:center;
+}
+.nav a{
+  color:var(--muted);text-decoration:none;padding:8px 12px;border-radius:10px;font-size:14px;
+}
+.nav a.cta{
+  background:linear-gradient(90deg,var(--accent),#7c3aed);color:white;box-shadow:0 8px 30px rgba(59,130,246,0.12);
+}
+
+/* Card / container for tools */
+.card{
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  border:1px solid rgba(255,255,255,0.03);
+  padding:20px;
+  border-radius:var(--radius);
+  box-shadow: 0 6px 24px rgba(2,6,23,0.6);
+}
+
+/* Tool grid */
+.grid{
+  display:grid;
+  grid-template-columns: repeat(auto-fit,minmax(280px,1fr));
+  gap:18px;
+  margin-top:18px;
+}
+
+/* Controls */
+.input-row{
+  display:flex;
+  gap:10px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+.input-row input[type="file"],
+.input-row select,
+.input-row button{
+  padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.04);
+  background:transparent;color:var(--text);font-size:14px;
+}
+.input-row button{
+  cursor:pointer;background:var(--accent);border:none;color:white;padding:10px 16px;
+  box-shadow:0 8px 20px rgba(59,130,246,0.12);
+}
+
+/* Result */
+.result{
+  margin-top:16px;padding:12px;border-radius:10px;background:var(--glass);color:var(--text);
+  font-size:15px;
+}
+
+/* Footer */
+.footer{
+  margin-top:28px;padding:16px;text-align:center;color:var(--muted);font-size:13px;
+  border-top:1px solid rgba(255,255,255,0.02);
+}
+
+/* Responsive small */
+@media (max-width:640px){
+  .header{flex-direction:column;align-items:flex-start;gap:12px}
+  .nav{width:100%;justify-content:space-between}
+}
