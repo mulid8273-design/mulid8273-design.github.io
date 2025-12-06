@@ -1,32 +1,41 @@
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이미지 변환</title>
-    <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+document.getElementById("convertBtn").addEventListener("click", () => {
+    const file = document.getElementById("imgInput").files[0];
+    const format = document.getElementById("imgFormat").value;
+    const result = document.getElementById("result");
 
-<header>
-    <h1>이미지 변환</h1>
-    <a href="index.html">← 홈으로</a>
-</header>
+    if (!file) {
+        result.innerHTML = "<p style='color:red;'>파일을 선택하세요.</p>";
+        return;
+    }
 
-<div class="container">
-    <input type="file" id="imgInput" accept="image/*">
+    const img = new Image();
+    const reader = new FileReader();
 
-    <select id="imgFormat">
-        <option value="png">PNG로 변환</option>
-        <option value="jpg">JPG로 변환</option>
-        <option value="webp">WEBP로 변환</option>
-    </select>
+    reader.onload = e => {
+        img.src = e.target.result;
+        img.onload = () => {
+            const canvas = document.createElement("canvas");
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext("2d");
+            ctx.drawImage(img, 0, 0);
 
-    <button id="convertBtn">변환하기</button>
+            canvas.toBlob(
+                blob => {
+                    const url = URL.createObjectURL(blob);
 
-    <div id="result"></div>
-</div>
+                    result.innerHTML = `
+                        <a href="${url}" download="converted.${format}" 
+                           style="font-size:20px;color:blue;">
+                           변환된 이미지 다운로드
+                        </a>
+                    `;
+                },
+                "image/" + format,
+                0.92
+            );
+        };
+    };
 
-<script src="js/image.js"></script>
-</body>
-</html>
+    reader.readAsDataURL(file);
+});
