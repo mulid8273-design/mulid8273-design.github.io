@@ -12,50 +12,90 @@
         text-align: center;
         padding: 20px;
     }
+
     h1 {
-        margin-bottom: 30px;
+        margin-bottom: 20px;
         font-size: 2rem;
     }
+
+    /* 앨범 아트 */
+    .album-art {
+        width: 250px;
+        height: 250px;
+        border-radius: 15px;
+        margin: 0 auto 20px;
+        object-fit: cover;
+        box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+    }
+
+    /* 비디오 */
     video {
         width: 90%;
         max-width: 600px;
         border-radius: 12px;
         margin-bottom: 20px;
     }
-    .links {
+
+    /* 서비스 로고 버튼 */
+    .service-links {
         display: flex;
-        flex-direction: column;
+        justify-content: center;
         gap: 15px;
+        flex-wrap: wrap;
         margin-top: 20px;
     }
-    .links a {
-        text-decoration: none;
-        color: #fff;
-        background: #ff3366;
-        padding: 12px 20px;
-        border-radius: 8px;
-        transition: 0.3s;
+
+    .service-links a {
+        display: inline-block;
+        width: 80px;
+        height: 80px;
+        transition: transform 0.3s;
     }
-    .links a:hover {
-        background: #ff6699;
+
+    .service-links a img {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        border-radius: 12px;
+        box-shadow: 0 0 10px rgba(255,255,255,0.2);
+    }
+
+    .service-links a:hover {
+        transform: scale(1.1);
     }
 </style>
 </head>
 <body>
-    <h1>MULID 바로가기</h1>
 
-    <video id="previewVideo" controls autoplay>
-        <source src="https://www.youtube.com/embed/HtCuoRrG4Vw?autoplay=1" type="video/mp4">
-        브라우저가 video 태그를 지원하지 않습니다.
-    </video>
+<h1>MULID 바로가기</h1>
 
-    <div class="links" id="serviceLinks" style="display:none;">
-        <a href="https://www.youtube.com/watch?v=HtCuoRrG4Vw" target="_blank">YouTube</a>
-        <a href="https://music.bugs.co.kr/album/20701451" target="_blank">벅스</a>
-        <a href="https://www.genie.co.kr/detail/songInfo?xgnm=108928610" target="_blank">지니뮤직</a>
-        <a href="https://vibe.naver.com/track/89148666" target="_blank">VIBE</a>
-        <a href="https://www.melon.com/album/detail.htm?albumId=11708544" target="_blank">멜론</a>
-    </div>
+<!-- 앨범 아트 -->
+<img src="https://cdnimg.melon.co.kr/cm/album/images/117/08/544/11708544_500.jpg" alt="앨범 아트" class="album-art">
+
+<!-- 미리보기 비디오 -->
+<video id="previewVideo" controls autoplay>
+    <source src="https://www.youtube.com/embed/HtCuoRrG4Vw?autoplay=1" type="video/mp4">
+    브라우저가 video 태그를 지원하지 않습니다.
+</video>
+
+<!-- 서비스 로고 버튼 -->
+<div class="service-links" id="serviceLinks" style="display:none;">
+    <a href="https://www.youtube.com/watch?v=HtCuoRrG4Vw" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube">
+    </a>
+    <a href="https://music.bugs.co.kr/album/20701451" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Bugs_Logo.svg" alt="Bugs">
+    </a>
+    <a href="https://www.genie.co.kr/detail/songInfo?xgnm=108928610" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Genie_Music_logo.svg" alt="Genie">
+    </a>
+    <a href="https://vibe.naver.com/track/89148666" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/f/f4/Vibe_logo.svg" alt="VIBE">
+    </a>
+    <a href="https://www.melon.com/album/detail.htm?albumId=11708544" target="_blank">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Melon_logo.png" alt="Melon">
+    </a>
+</div>
 
 <script>
     const video = document.getElementById('previewVideo');
@@ -69,5 +109,6 @@
         }
     });
 </script>
+
 </body>
 </html>
