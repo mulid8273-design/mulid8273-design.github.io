@@ -36,7 +36,7 @@ body::before {
     position: relative;
     width: 200px;
     height: 200px;
-    margin-top: 50px; /* 위쪽 여백 추가 */
+    margin-top: 50px;
     margin-bottom: 10px;
 }
 
@@ -53,6 +53,17 @@ body::before {
     color: #fff;
     margin: 10px 0 20px 0;
     font-weight: bold;
+}
+
+.play-overlay {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;
+    color: rgba(255,255,255,0.8);
+    cursor: pointer;
+    pointer-events: none;
 }
 
 .service-links {
@@ -97,68 +108,92 @@ body::before {
 <body>
 
 <div class="album-container">
-    <img id="albumArt" src="https://image.bugsm.co.kr/album/images/original/207014/20701451.jpg?version=undefined" alt="앨범 아트" class="album-art">
-    <audio id="albumAudio">
-        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
-    </audio>
+    <img id="albumArt" src="https://image.bugsm.co.kr/album/images/original/207014/20701451.jpg?version=undefined" class="album-art">
+    <div id="playOverlay" class="play-overlay">▶</div>
 </div>
 
 <div class="album-title">휴복 - 여름잔상</div>
 
 <div class="service-links">
-    <!-- YouTube -->
     <a href="https://www.youtube.com/watch?v=HtCuoRrG4Vw" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_youtube_onlight.svg" alt="YouTube">
         <span class="play-text">PLAY</span>
     </a>
-    <!-- Melon -->
     <a href="https://www.melon.com/album/detail.htm?albumId=11708544" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_melon_onlight.svg" alt="Melon">
         <span class="play-text">PLAY</span>
     </a>
-    <!-- Genie -->
     <a href="https://www.genie.co.kr/detail/songInfo?xgnm=108928610" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_genie_onlight.svg" alt="Genie">
         <span class="play-text">PLAY</span>
     </a>
-    <!-- Bugs -->
     <a href="https://music.bugs.co.kr/album/20701451" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_bugs_onlight.svg" alt="Bugs">
         <span class="play-text">PLAY</span>
     </a>
-    <!-- FLO -->
     <a href="https://www.music-flo.com/detail/album/433416681/albumtrack" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_flo_onlight.svg" alt="FLO">
         <span class="play-text">PLAY</span>
     </a>
-    <!-- VIBE -->
     <a href="https://vibe.naver.com/track/89148666" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_vibe_onlight.svg" alt="VIBE">
         <span class="play-text">PLAY</span>
     </a>
-    <!-- Apple Music -->
     <a href="https://music.apple.com/kr/album/summer-glow-single/1792130145" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_applemusic_onlight.svg" alt="Apple Music">
         <span class="play-text">PLAY</span>
     </a>
-    <!-- Spotify -->
     <a href="https://open.spotify.com/track/6cMdYxKZNbxhTgqQkNbshy" target="_blank" class="service-button">
         <img src="https://services.linkfire.com/logo_spotify_onlight.svg" alt="Spotify">
         <span class="play-text">PLAY</span>
     </a>
 </div>
 
+<!-- YouTube IFrame API -->
+<div id="player" style="display:none;"></div>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
+let player;
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('player', {
+        height: '0',
+        width: '0',
+        videoId: 'HtCuoRrG4Vw',
+        playerVars: { 'autoplay': 0, 'controls': 0 }
+    });
+}
+
 const albumArt = document.getElementById('albumArt');
-const albumAudio = document.getElementById('albumAudio');
+const playOverlay = document.getElementById('playOverlay');
+const startTime = 47; // 시작 초
+const endTime = 71;   // 종료 초
+let isPlaying = false;
 
 albumArt.addEventListener('click', () => {
-    if(albumAudio.paused) {
-        albumAudio.play();
+    if (!player) return;
+    if(!isPlaying) {
+        player.seekTo(startTime);
+        player.playVideo();
+        playOverlay.textContent = '⏸';
+        isPlaying = true;
     } else {
-        albumAudio.pause();
+        player.pauseVideo();
+        playOverlay.textContent = '▶';
+        isPlaying = false;
     }
 });
+
+// 하이라이트 구간 재생 후 자동 정지
+setInterval(() => {
+    if(player && isPlaying) {
+        const current = player.getCurrentTime();
+        if(current >= endTime) {
+            player.pauseVideo();
+            playOverlay.textContent = '▶';
+            isPlaying = false;
+        }
+    }
+}, 200);
 </script>
 
 </body>
