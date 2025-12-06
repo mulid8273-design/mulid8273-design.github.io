@@ -1,24 +1,31 @@
-document.getElementById("pdfConvertBtn").addEventListener("click", () => {
-  const file = document.getElementById("pdfInput").files[0];
-  if(!file){
-    alert("파일을 선택해주세요!");
-    return;
-  }
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일 변환</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
 
-  // 브라우저 내 안정 변환: 2MB 이하 권장
-  if(file.size > 2 * 1024 * 1024){
-    alert("브라우저에서는 2MB 이하 PPT/PDF 파일만 안정적으로 변환 가능합니다.");
-    return;
-  }
+<header>
+    <h1>파일 변환</h1>
+    <a href="index.html">← 홈으로</a>
+</header>
 
-  const reader = new FileReader();
-  reader.onload = function(e){
-    const blob = new Blob([e.target.result], {type:"application/pdf"});
-    const link = document.getElementById("pdfDownload");
-    link.href = URL.createObjectURL(blob);
-    link.download = `converted_${file.name.split('.')[0]}.pdf`;
-    link.style.display = "inline";
-    link.textContent = '다운로드';
-  };
-  reader.readAsArrayBuffer(file);
-});
+<div class="container">
+    <input type="file" id="fileInput">
+
+    <select id="fileFormat">
+        <option value="txt">TXT로 변환</option>
+        <option value="pdf">PDF로 변환</option>
+    </select>
+
+    <button id="fileConvertBtn">변환하기</button>
+
+    <div id="fileResult"></div>
+</div>
+
+<script src="js/pdf.js"></script>
+</body>
+</html>
