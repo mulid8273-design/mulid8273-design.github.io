@@ -39,20 +39,19 @@ h1 {
 }
 
 /* 앨범 아트 */
-.album-art {
+.album-container {
+    position: relative;
     width: 250px;
     height: 250px;
-    border-radius: 15px;
     margin-bottom: 20px;
-    object-fit: cover;
 }
 
-/* 비디오 */
-video {
-    width: 90%;
-    max-width: 600px;
-    border-radius: 12px;
-    margin-bottom: 20px;
+.album-art {
+    width: 100%;
+    height: 100%;
+    border-radius: 15px;
+    object-fit: cover;
+    cursor: pointer;
 }
 
 /* 서비스 로고 버튼 */
