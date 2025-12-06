@@ -5,63 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>MULID 링크 페이지</title>
 <style>
+    /* 기본 설정 */
     body {
-        font-family: Arial, sans-serif;
-        background: #111;
+        font-family: 'Arial', sans-serif;
+        background: linear-gradient(135deg, #0d0d0d, #1a1a1a);
         color: #fff;
         text-align: center;
         padding: 20px;
     }
 
     h1 {
-        margin-bottom: 20px;
-        font-size: 2rem;
+        font-size: 2.5rem;
+        margin-bottom: 25px;
+        letter-spacing: 1px;
+        text-shadow: 0 0 10px #ff3366;
     }
 
     /* 앨범 아트 */
     .album-art {
-        width: 250px;
-        height: 250px;
-        border-radius: 15px;
-        margin: 0 auto 20px;
+        width: 280px;
+        height: 280px;
+        border-radius: 20px;
+        margin: 0 auto 25px;
         object-fit: cover;
-        box-shadow: 0 0 20px rgba(255, 51, 102, 0.5);
+        box-shadow: 0 0 30px rgba(255, 51, 102, 0.6);
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .album-art:hover {
+        transform: scale(1.05);
+        box-shadow: 0 0 40px rgba(255, 51, 102, 0.8);
     }
 
     /* 비디오 */
     video {
         width: 90%;
-        max-width: 600px;
-        border-radius: 12px;
-        margin-bottom: 20px;
+        max-width: 650px;
+        border-radius: 15px;
+        box-shadow: 0 0 20px rgba(255, 51, 102, 0.4);
+        margin-bottom: 25px;
+        transition: box-shadow 0.3s;
+    }
+    video.playing {
+        box-shadow: 0 0 40px #ff3366;
     }
 
     /* 서비스 로고 버튼 */
     .service-links {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        gap: 20px;
         flex-wrap: wrap;
         margin-top: 20px;
     }
-
     .service-links a {
         display: inline-block;
-        width: 80px;
-        height: 80px;
-        transition: transform 0.3s;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        overflow: hidden;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.2);
+        transition: transform 0.3s, box-shadow 0.3s;
     }
-
     .service-links a img {
         width: 100%;
         height: 100%;
         object-fit: contain;
-        border-radius: 12px;
-        box-shadow: 0 0 10px rgba(255,255,255,0.2);
+        display: block;
     }
-
     .service-links a:hover {
-        transform: scale(1.1);
+        transform: scale(1.2);
+        box-shadow: 0 0 25px #ff3366;
     }
 </style>
 </head>
@@ -73,7 +86,7 @@
 <img src="https://cdnimg.melon.co.kr/cm/album/images/117/08/544/11708544_500.jpg" alt="앨범 아트" class="album-art">
 
 <!-- 미리보기 비디오 -->
-<video id="previewVideo" controls autoplay>
+<video id="previewVideo" controls>
     <source src="https://www.youtube.com/embed/HtCuoRrG4Vw?autoplay=1" type="video/mp4">
     브라우저가 video 태그를 지원하지 않습니다.
 </video>
@@ -101,12 +114,20 @@
     const video = document.getElementById('previewVideo');
     const links = document.getElementById('serviceLinks');
 
-    // 15초 미리보기 후 링크 표시
+    // 비디오 15초 미리보기 후 링크 표시
     video.addEventListener('timeupdate', () => {
         if(video.currentTime >= 15) {
             video.pause();
             links.style.display = 'flex';
         }
+    });
+
+    // 재생 중 glow 효과
+    video.addEventListener('play', () => {
+        video.classList.add('playing');
+    });
+    video.addEventListener('pause', () => {
+        video.classList.remove('playing');
     });
 </script>
 
