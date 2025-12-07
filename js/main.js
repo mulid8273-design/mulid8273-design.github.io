@@ -1,2 +1,2 @@
-// 공통 기능 (현재는 예비용)
-console.log("MULID main.js 로딩됨");
+// MULID 사이트 공통 스크립트
+console.log("main.js loaded successfully");
