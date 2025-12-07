@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>개인정보처리방침 - MULID 멀티 변환기</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>개인정보 처리방침</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
-<h1>개인정보처리방침</h1>
-<nav>
-    <a href="index.html">홈</a> |
-    <a href="faq.html">FAQ</a> |
-    <a href="contact.html">문의하기</a> |
-    <a href="privacy.html">개인정보처리방침</a>
-</nav>
-</header>
-<main>
-<p>개인정보 처리방침 내용을 여기에 작성하세요.</p>
-</main>
+
+<!-- 광고 자동 삽입 -->
+<div id="adsense-area"></div>
+<script>
+fetch('/adsense.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('adsense-area').innerHTML = html;
+  });
+</script>
+
+<h1>개인정보 처리방침</h1>
+<p>본 사이트는 개인 정보를 저장하지 않습니다.</p>
+
 <footer>
-<p>© 2025 MULID DESIGN</p>
+    © 2025 MULID
 </footer>
 </body>
 </html>
