@@ -11,9 +11,9 @@
 <!-- 광고 자동 삽입 -->
 <div id="adsense-area"></div>
 <script>
-fetch('/adsense.html')
+fetch("adsense.html")
   .then(res => res.text())
-  .then(html => { document.getElementById('adsense-area').innerHTML = html; });
+  .then(html => { document.getElementById("adsense-area").innerHTML = html; });
 </script>
 
 <nav>
@@ -26,21 +26,19 @@ fetch('/adsense.html')
 </nav>
 
 <main>
-  <h1>영상 변환 (FFmpeg.wasm)</h1>
-  <section class="card">
-    <p>브라우저내 변환 — 큰 파일은 브라우저 메모리 제한에 주의하세요.</p>
+  <h1>영상 변환</h1>
 
+  <section class="card">
     <input id="videoInput" type="file" accept="video/*" />
     <div style="margin-top:10px;">
       <select id="videoFormat">
-        <option value="mp4">mp4</option>
-        <option value="webm">webm</option>
-        <option value="gif">gif</option>
+        <option value="mp4">MP4</option>
+        <option value="webm">WEBM</option>
+        <option value="gif">GIF</option>
       </select>
       <button id="videoConvertBtn">변환</button>
     </div>
-
-    <div id="videoResult" class="ad-container" style="margin-top:14px;">변환 결과가 여기 표시됩니다.</div>
+    <div id="videoResult" style="margin-top:14px;">변환 결과가 여기 표시됩니다.</div>
   </section>
 </main>
 
@@ -48,7 +46,7 @@ fetch('/adsense.html')
   <p>© 2025 MULID</p>
 </footer>
 
-<!-- FFmpeg.wasm (CDN) -->
+<!-- FFmpeg CDN -->
 <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.10.0/dist/ffmpeg.min.js"></script>
 
 <script src="js/main.js"></script>
