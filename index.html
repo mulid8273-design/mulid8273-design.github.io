@@ -1,39 +1,44 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MULID 멀티 변환기</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MULID 변환 서비스</title>
+    <link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
 
+<!-- 광고 자동 삽입 -->
+<div id="adsense-area"></div>
+<script>
+fetch('/adsense.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('adsense-area').innerHTML = html;
+  });
+</script>
+
 <header>
-    <h1>MULID 멀티 변환기</h1>
-    <nav>
-        <a href="index.html">홈</a> |
-        <a href="faq.html">FAQ</a> |
-        <a href="contact.html">문의하기</a> |
-        <a href="privacy.html">개인정보처리방침</a>
-    </nav>
+    <h1>MULID 변환 서비스</h1>
 </header>
 
-<div class="container">
+<nav>
+    <a href="convert-image.html">이미지 변환</a>
+    <a href="convert-video.html">영상 변환</a>
+    <a href="convert-file.html">파일 변환</a>
+    <a href="faq.html">FAQ</a>
+    <a href="contact.html">문의</a>
+</nav>
 
-    <h2>🔍 변환 기능 목록</h2>
-
-    <ul class="menu-list">
-        <li><a href="convert-image.html">🖼 이미지 변환</a></li>
-        <li><a href="convert-video.html">🎬 동영상 변환</a></li>
-        <li><a href="convert-file.html">📄 PDF / TXT 변환</a></li>
-    </ul>
-
-</div>
+<main>
+    <h2>환영합니다!</h2>
+    <p>이미지, 영상, 파일을 빠르게 변환하세요.</p>
+</main>
 
 <footer>
-    <p>© 2025 MULID DESIGN</p>
+    <p>© 2025 MULID</p>
 </footer>
 
+<script src="js/main.js"></script>
 </body>
 </html>
