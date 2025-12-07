@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이미지 변환</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>이미지 변환 · MULID</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -13,16 +13,42 @@
 <script>
 fetch('/adsense.html')
   .then(res => res.text())
-  .then(html => {
-    document.getElementById('adsense-area').innerHTML = html;
-  });
+  .then(html => { document.getElementById('adsense-area').innerHTML = html; });
 </script>
 
-<h1>이미지 변환</h1>
+<nav>
+  <a href="index.html">홈</a>
+  <a href="convert-image.html" class="active">이미지</a>
+  <a href="convert-video.html">영상</a>
+  <a href="convert-file.html">파일</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">문의</a>
+</nav>
 
-<input type="file" id="imageInput" accept="image/*">
-<button onclick="convertImage()">변환하기</button>
+<main>
+  <h1>이미지 변환</h1>
+  <section class="card">
+    <p>PNG / JPG / WEBP 등 브라우저 내 변환(다운로드) — 서버 불필요.</p>
 
+    <input id="imgInput" type="file" accept="image/*" />
+    <div style="margin-top:10px;">
+      <select id="imgFormat">
+        <option value="png">PNG</option>
+        <option value="jpg">JPG</option>
+        <option value="webp">WEBP</option>
+      </select>
+      <button id="convertBtn">변환</button>
+    </div>
+
+    <div id="result" class="ad-container" style="margin-top:14px;">변환 결과가 여기 표시됩니다.</div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 MULID</p>
+</footer>
+
+<script src="js/main.js"></script>
 <script src="js/image.js"></script>
 </body>
 </html>
