@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>개인정보 처리방침</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>개인정보처리방침 · MULID</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -13,16 +13,29 @@
 <script>
 fetch('/adsense.html')
   .then(res => res.text())
-  .then(html => {
-    document.getElementById('adsense-area').innerHTML = html;
-  });
+  .then(html => { document.getElementById('adsense-area').innerHTML = html; });
 </script>
 
-<h1>개인정보 처리방침</h1>
-<p>본 사이트는 개인 정보를 저장하지 않습니다.</p>
+<nav>
+  <a href="index.html">홈</a>
+  <a href="convert-image.html">이미지</a>
+  <a href="convert-video.html">영상</a>
+  <a href="convert-file.html">파일</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">문의</a>
+</nav>
+
+<main>
+  <h1>개인정보 처리방침</h1>
+  <section class="card">
+    <p>본 사이트는 변환 작업을 클라이언트(브라우저)에서 수행하며, 변환을 위해 파일을 서버로 업로드하지 않습니다. 개인 정보는 저장하지 않습니다.</p>
+  </section>
+</main>
 
 <footer>
-    © 2025 MULID
+  <p>© 2025 MULID</p>
 </footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
