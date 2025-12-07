@@ -1,26 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>문의하기 - MULID 멀티 변환기</title>
-<link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기 - MULID</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
+
+<!-- 광고 자동 삽입 -->
+<div id="adsense-area"></div>
+<script>
+fetch('/adsense.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('adsense-area').innerHTML = html;
+  });
+</script>
+
 <h1>문의하기</h1>
-<nav>
-    <a href="index.html">홈</a> |
-    <a href="faq.html">FAQ</a> |
-    <a href="contact.html">문의하기</a> |
-    <a href="privacy.html">개인정보처리방침</a>
-</nav>
-</header>
-<main>
-<p>문의 내용을 작성할 수 있는 폼을 여기에 추가하세요.</p>
-</main>
+<p>문의는 이메일로 보내주세요: mulid8273@gmail.com</p>
+
 <footer>
-<p>© 2025 MULID DESIGN</p>
+    © 2025 MULID
 </footer>
 </body>
 </html>
