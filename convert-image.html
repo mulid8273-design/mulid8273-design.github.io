@@ -11,9 +11,9 @@
 <!-- 광고 자동 삽입 -->
 <div id="adsense-area"></div>
 <script>
-fetch('/adsense.html')
+fetch("adsense.html")
   .then(res => res.text())
-  .then(html => { document.getElementById('adsense-area').innerHTML = html; });
+  .then(html => { document.getElementById("adsense-area").innerHTML = html; });
 </script>
 
 <nav>
@@ -27,9 +27,8 @@ fetch('/adsense.html')
 
 <main>
   <h1>이미지 변환</h1>
-  <section class="card">
-    <p>PNG / JPG / WEBP 등 브라우저 내 변환(다운로드) — 서버 불필요.</p>
 
+  <section class="card">
     <input id="imgInput" type="file" accept="image/*" />
     <div style="margin-top:10px;">
       <select id="imgFormat">
@@ -39,8 +38,7 @@ fetch('/adsense.html')
       </select>
       <button id="convertBtn">변환</button>
     </div>
-
-    <div id="result" class="ad-container" style="margin-top:14px;">변환 결과가 여기 표시됩니다.</div>
+    <div id="result" style="margin-top:14px;">변환 결과가 여기 표시됩니다.</div>
   </section>
 </main>
 
