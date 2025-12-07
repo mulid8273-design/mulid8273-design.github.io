@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>FAQ - MULID</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FAQ · MULID</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -13,20 +13,34 @@
 <script>
 fetch('/adsense.html')
   .then(res => res.text())
-  .then(html => {
-    document.getElementById('adsense-area').innerHTML = html;
-  });
+  .then(html => { document.getElementById('adsense-area').innerHTML = html; });
 </script>
 
-<h1>자주 묻는 질문</h1>
+<nav>
+  <a href="index.html">홈</a>
+  <a href="convert-image.html">이미지</a>
+  <a href="convert-video.html">영상</a>
+  <a href="convert-file.html">파일</a>
+  <a href="faq.html" class="active">FAQ</a>
+  <a href="contact.html">문의</a>
+</nav>
 
-<section>
+<main>
+  <h1>자주 묻는 질문 (FAQ)</h1>
+
+  <section class="card">
     <h3>Q. 변환은 무료인가요?</h3>
-    <p>모든 변환은 100% 무료입니다.</p>
-</section>
+    <p>A. 예, 모든 변환 기능은 무료입니다.</p>
+
+    <h3>Q. 파일은 서버에 저장되나요?</h3>
+    <p>A. 아니요. 모든 변환은 브라우저 내에서 이루어지며 서버에 업로드되지 않습니다 (GitHub Pages 사용 기준).</p>
+  </section>
+</main>
 
 <footer>
-    © 2025 MULID
+  <p>© 2025 MULID</p>
 </footer>
+
+<script src="js/main.js"></script>
 </body>
 </html>
