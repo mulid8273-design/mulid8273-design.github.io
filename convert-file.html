@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>파일 변환</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>파일 변환 · MULID</title>
+  <link rel="stylesheet" href="css/style.css" />
 </head>
 <body>
 
@@ -13,16 +13,45 @@
 <script>
 fetch('/adsense.html')
   .then(res => res.text())
-  .then(html => {
-    document.getElementById('adsense-area').innerHTML = html;
-  });
+  .then(html => { document.getElementById('adsense-area').innerHTML = html; });
 </script>
 
-<h1>파일 변환</h1>
+<nav>
+  <a href="index.html">홈</a>
+  <a href="convert-image.html">이미지</a>
+  <a href="convert-video.html">영상</a>
+  <a href="convert-file.html" class="active">파일</a>
+  <a href="faq.html">FAQ</a>
+  <a href="contact.html">문의</a>
+</nav>
 
-<input type="file" id="fileInput">
-<button onclick="convertFile()">변환하기</button>
+<main>
+  <h1>파일 변환</h1>
+  <section class="card">
+    <p>PDF → TXT, TXT → PDF (브라우저 기반)</p>
 
+    <input id="fileInput" type="file" />
+    <div style="margin-top:10px;">
+      <select id="fileFormat">
+        <option value="txt">PDF → TXT</option>
+        <option value="pdf">TXT → PDF</option>
+      </select>
+      <button id="fileConvertBtn">변환</button>
+    </div>
+
+    <div id="fileResult" class="ad-container" style="margin-top:14px;">변환 결과가 여기 표시됩니다.</div>
+  </section>
+</main>
+
+<footer>
+  <p>© 2025 MULID</p>
+</footer>
+
+<!-- PDF.js + jsPDF CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<script src="js/main.js"></script>
 <script src="js/pdf.js"></script>
 </body>
 </html>
