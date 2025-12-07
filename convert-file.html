@@ -1,65 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>파일 변환 · MULID</title>
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파일 변환</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="wrapper">
-    <header class="header">
-      <div class="brand">
-        <div class="logo">M</div>
-        <div>
-          <h1>MULID 변환기</h1>
-          <div style="font-size:12px;color:var(--muted)">PDF ↔ TXT 등 파일 변환</div>
-        </div>
-      </div>
-      <nav class="nav">
-        <a href="index.html">홈</a>
-        <a href="convert-image.html">이미지</a>
-        <a href="convert-video.html">영상</a>
-        <a href="convert-file.html" class="cta">파일</a>
-        <a href="privacy.html">개인정보</a>
-      </nav>
-    </header>
 
-    <main>
-      <section class="card">
-        <h2>파일 변환</h2>
-        <p style="color:var(--muted)">PDF → TXT, TXT → PDF 지원 (브라우저 기반).</p>
+<!-- 광고 자동 삽입 -->
+<div id="adsense-area"></div>
+<script>
+fetch('/adsense.html')
+  .then(res => res.text())
+  .then(html => {
+    document.getElementById('adsense-area').innerHTML = html;
+  });
+</script>
 
-        <div class="grid">
-          <div class="card">
-            <strong>업로드</strong>
-            <div class="input-row">
-              <input id="fileInput" type="file">
-              <select id="fileFormat">
-                <option value="txt">PDF → TXT</option>
-                <option value="pdf">TXT → PDF</option>
-              </select>
-              <button id="fileConvertBtn">변환</button>
-            </div>
-            <div id="fileResult" class="result">변환 결과가 여기 표시됩니다.</div>
-          </div>
-        </div>
-      </section>
-    </main>
+<h1>파일 변환</h1>
 
-    <footer class="footer">
-      © <span id="year3"></span> MULID · 변환 사이트
-    </footer>
-  </div>
+<input type="file" id="fileInput">
+<button onclick="convertFile()">변환하기</button>
 
-  <!-- PDF.js + jsPDF (CDN) -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-
-  <script src="js/main.js"></script>
-  <script src="js/pdf.js"></script>
-  <script>
-    document.getElementById('year3').textContent = new Date().getFullYear();
-  </script>
+<script src="js/pdf.js"></script>
 </body>
 </html>
