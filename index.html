@@ -1,39 +1,61 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MULID 변환 서비스</title>
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MULID — 온라인 변환 도구</title>
+
+    <!-- Google Adsense -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6998063928409116"
+        crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <!-- favicon optional -->
+    <link rel="icon" href="favicon.ico">
+
 </head>
 <body>
 
-<!-- 광고 자동 삽입 -->
-<div id="adsense-area"></div>
-<script>
-fetch("adsense.html")
-  .then(res => res.text())
-  .then(html => { document.getElementById("adsense-area").innerHTML = html; });
-</script>
+    <!-- Navbar -->
+    <header class="navbar">
+        <a href="index.html" class="logo">MULID</a>
+        <nav>
+            <a href="convert-image.html">이미지 변환</a>
+            <a href="convert-video.html">영상 변환</a>
+            <a href="convert-file.html">PDF/문서 변환</a>
+            <a href="faq.html">FAQ</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
 
-<nav>
-  <a href="index.html">홈</a>
-  <a href="convert-image.html">이미지</a>
-  <a href="convert-video.html">영상</a>
-  <a href="convert-file.html">파일</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html">문의</a>
-</nav>
+    <section class="hero">
+        <h1>무료 이미지 · 영상 · 파일 변환</h1>
+        <p>브라우저에서 바로 안전하게 변환하세요. 데이터는 서버에 저장되지 않습니다.</p>
+        <div class="hero-buttons">
+            <a class="btn" href="convert-image.html">이미지 변환 시작</a>
+            <a class="btn secondary" href="convert-video.html">영상 변환 시작</a>
+            <a class="btn secondary" href="convert-file.html">PDF 변환</a>
+        </div>
+    </section>
 
-<main>
-  <h1>MULID 멀티 변환기</h1>
-  <p>이미지 · 영상 · 파일을 브라우저에서 바로 변환하세요.</p>
-</main>
+    <!-- Adsense Auto Ads Area -->
+    <div class="ads-section">
+        <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-6998063928409116"
+            data-ad-slot="1234567890"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
 
-<footer>
-  <p>© 2025 MULID</p>
-</footer>
+    <footer>
+        <p>© 2025 MULID — All rights reserved.</p>
+    </footer>
 
-<script src="js/main.js"></script>
+    <script src="js/main.js"></script>
 </body>
 </html>
