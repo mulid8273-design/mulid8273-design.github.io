@@ -1,276 +1,336 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MULID 변환 서비스 - Minimal Gray Noise</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>MULID — All-in-One Converter (Minimal Gray)</title>
+
+<!-- External libs (CDN) -->
+<!-- ffmpeg.wasm (for video/audio conversions) -->
+<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.6/dist/ffmpeg.min.js"></script>
+<!-- JSZip (zip compress/uncompress) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.7.1/jszip.min.js"></script>
+<!-- pdf-lib (create basic PDFs from text/images) -->
+<script src="https://cdn.jsdelivr.net/npm/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
 
 <style>
-/* ===== Global ===== */
-body {
-    margin: 0;
-    font-family: 'Inter', 'Pretendard', sans-serif;
-    background: #f2f2f2;
-    color: #111;
-    /* Noise Texture */
-    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42mP8/5+hHgAHggJ/lD1gVAAAAABJRU5ErkJggg==');
+:root{
+  --bg:#f2f2f2; --card:#fff; --muted:#777; --accent:#111;
 }
+*{box-sizing:border-box}
+body{margin:0;font-family:Inter, Pretendard, system-ui, -apple-system, 'Segoe UI', Roboto, 'Noto Sans KR';background:var(--bg);color:var(--accent);background-image:url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42mP8/5+hHgAHggJ/lD1gVAAAAABJRU5ErkJggg==');}
+nav{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid #e0e0e0;background:rgba(255,255,255,0.75);backdrop-filter:blur(6px)}
+.logo{font-weight:700}
+.nav-links{display:flex;gap:14px}
+.container{max-width:1100px;margin:28px auto;padding:0 16px}
+.header{display:flex;gap:16px;align-items:center;justify-content:space-between}
+.title{margin:8px 0}
+.hero{padding:20px 0}
+.card{background:var(--card);border:1px solid #e6e6e6;border-radius:12px;padding:18px}
+.upload{display:flex;gap:16px;align-items:center}
+.drop-area{flex:1;min-height:140px;border:2px dashed #ddd;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:18px;cursor:pointer;background:linear-gradient(180deg, rgba(255,255,255,0.6), rgba(255,255,255,0.4))}
+.controls{width:320px}
+.select, input[type=file], button{width:100%;padding:10px;border-radius:8px;border:1px solid #ccc;background:#fafafa}
+button.primary{background:#111;color:white;border:0}
+.features{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-top:18px}
+.feature{display:flex;gap:12px;align-items:center;padding:12px;border-radius:10px;border:1px solid #eee}
+.feature img{width:28px;height:28px}
+.progress{height:8px;background:#eee;border-radius:6px;overflow:hidden}
+.progress > i{display:block;height:100%;width:0;background:#111}
+.small{font-size:13px;color:var(--muted)}
+.footer{margin:28px 0;text-align:center;color:var(--muted)}
 
-/* ===== Navigation ===== */
-nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 16px 40px;
-    border-bottom: 1px solid #dcdcdc;
-    background: rgba(255,255,255,0.7);
-    backdrop-filter: blur(8px);
-}
-nav .logo {
-    font-size: 20px;
-    font-weight: 700;
-}
-nav ul {
-    list-style: none;
-    display: flex;
-    gap: 24px;
-    margin: 0;
-    padding: 0;
-}
-nav li {
-    cursor: pointer;
-    font-size: 15px;
-    opacity: 0.8;
-    transition: 0.2s;
-}
-nav li:hover {
-    opacity: 1;
-}
-
-/* ===== Hero ===== */
-.hero {
-    text-align: center;
-    padding: 70px 20px 40px 20px;
-}
-.hero h1 {
-    font-size: 34px;
-    font-weight: 700;
-}
-.hero p {
-    color: #666;
-    font-size: 17px;
-}
-
-/* ===== Upload Box ===== */
-.upload-box {
-    width: 92%;
-    max-width: 600px;
-    margin: 30px auto;
-    padding: 40px 30px;
-    border-radius: 16px;
-    border: 1px solid #d3d3d3;
-    background: rgba(255,255,255,0.8);
-    backdrop-filter: blur(6px);
-    text-align: center;
-}
-.upload-icon {
-    width: 40px;
-    opacity: 0.5;
-    margin-bottom: 10px;
-}
-
-.upload-box input { display: none; }
-
-.upload-box label {
-    cursor: pointer;
-    padding: 12px 24px;
-    border-radius: 10px;
-    background: #e4e4e4;
-    border: 1px solid #c9c9c9;
-    color: #111;
-    transition: 0.2s;
-    display: inline-block;
-    font-size: 15px;
-}
-.upload-box label:hover {
-    background: #d8d8d8;
-}
-
-/* ===== Convert Button ===== */
-.convert-btn {
-    margin-top: 25px;
-    padding: 14px 40px;
-    font-size: 16px;
-    color: #fff;
-    background: #111;
-    border: none;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-.convert-btn:hover {
-    background: #000;
-}
-
-/* ===== Feature Section ===== */
-.features {
-    padding: 70px 20px;
-    text-align: center;
-}
-.features h2 {
-    font-size: 28px;
-    font-weight: 700;
-    margin-bottom: 20px;
-}
-.feature-boxes {
-    display: flex;
-    justify-content: center;
-    gap: 16px;
-    flex-wrap: wrap;
-    max-width: 900px;
-    margin: auto;
-}
-.feature-card {
-    width: 230px;
-    padding: 22px;
-    border-radius: 14px;
-    border: 1px solid #dbdbdb;
-    background: #fff;
-    font-size: 15px;
-}
-.feature-card img {
-    width: 32px;
-    margin-bottom: 10px;
-    opacity: 0.7;
-}
-
-/* ===== Footer ===== */
-footer {
-    padding: 40px 20px;
-    font-size: 13px;
-    color: #777;
-    text-align: center;
-    border-top: 1px solid #dcdcdc;
-}
-
-/* ===== Mobile Optimized ===== */
-@media (max-width: 600px) {
-    nav {
-        padding: 14px 20px;
-    }
-    nav ul {
-        gap: 14px;
-    }
-    .hero h1 {
-        font-size: 28px;
-    }
-    .upload-box {
-        padding: 30px 20px;
-    }
-    .feature-card {
-        width: 45%;
-    }
-}
+/* mobile */
+@media(max-width:720px){.upload{flex-direction:column}.controls{width:100%}}
 </style>
-
-<script>
-// ===== Basic Conversion Example (Client-side Image → WebP) =====
-function convertFile() {
-    const fileInput = document.getElementById('fileInput').files[0];
-
-    if (!fileInput) {
-        alert("파일을 선택해주세요.");
-        return;
-    }
-
-    const reader = new FileReader();
-    reader.onload = function(event) {
-        const img = new Image();
-        img.src = event.target.result;
-
-        img.onload = function() {
-            const canvas = document.createElement('canvas');
-            canvas.width = img.width;
-            canvas.height = img.height;
-            const ctx = canvas.getContext('2d');
-            ctx.drawImage(img, 0, 0);
-
-            // 이미지 → WebP 변환
-            canvas.toBlob(function(blob) {
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = 'converted.webp';
-                link.click();
-            }, 'image/webp');
-        };
-    };
-
-    reader.readAsDataURL(fileInput);
-}
-</script>
 </head>
 <body>
 
 <nav>
-    <div class="logo">MULID</div>
-    <ul>
-        <li>홈</li>
-        <li>지원 변환</li>
-        <li>도움말</li>
-    </ul>
+  <div class="logo">MULID</div>
+  <div class="nav-links small">홈 · 지원 변환 · 도움말</div>
 </nav>
 
-<section class="hero">
-    <h1>초간단 파일 변환</h1>
-    <p>라이트 그레이 + 노이즈 질감의 미니멀 디자인</p>
-</section>
-
-<div class="upload-box">
-    <img class="upload-icon" src="https://img.icons8.com/ios-glyphs/60/upload--v1.png" />
-    <h2>파일 업로드</h2>
-    <p>이미지 업로드 시 WebP로 변환됩니다</p>
-
-    <input type="file" id="fileInput" accept="image/*">
-    <label for="fileInput">파일 선택</label>
-
-    <br />
-    <button class="convert-btn" onclick="convertFile()">변환하기</button>
-</div>
-
-<section class="features">
-    <h2>지원하는 기능</h2>
-    <div class="feature-boxes">
-        <div class="feature-card">
-            <img src="https://img.icons8.com/ios-glyphs/60/picture.png" />
-            이미지 변환
-        </div>
-        <div class="feature-card">
-            <img src="https://img.icons8.com/ios-glyphs/60/document.png" />
-            문서 → PDF
-        </div>
-        <div class="feature-card">
-            <img src="https://img.icons8.com/ios-glyphs/60/musical-notes.png" />
-            오디오 변환
-        </div>
-        <div class="feature-card">
-            <img src="https://img.icons8.com/ios-glyphs/60/video.png" />
-            영상 변환
-        </div>
-        <div class="feature-card">
-            <img src="https://img.icons8.com/ios-glyphs/60/zip.png" />
-            ZIP 압축/해제
-        </div>
-        <div class="feature-card">
-            <img src="https://img.icons8.com/ios-glyphs/60/txt.png" />
-            텍스트 변환
-        </div>
+<main class="container">
+  <section class="hero">
+    <div class="header">
+      <div>
+        <h1 class="title">MULID — 변환 도구 모음</h1>
+        <div class="small">이미지 · 영상 · 오디오 · 문서 · ZIP · 텍스트. 모두 한 곳에서.</div>
+      </div>
+      <div class="small">모바일 최적화 · 클라이언트/서버 병행 지원</div>
     </div>
-</section>
+  </section>
 
-<footer>
-    MULID © 2025. Minimal Gray Noise Converter
-</footer>
+  <section class="card upload">
+    <div class="drop-area" id="dropArea">
+      <div style="text-align:center">
+        <img src="https://img.icons8.com/ios-glyphs/60/upload--v1.png" alt="upload" style="opacity:.6;width:44px;height:44px;margin-bottom:8px">
+        <div id="dropText">파일을 끌어다 놓거나 클릭하여 선택하세요</div>
+        <div class="small" style="margin-top:8px">여러 파일 지원 · 이미지: JPG/PNG/WebP · 영상/오디오: mp4/mov/mp3/wav · 문서: txt</div>
+      </div>
+    </div>
 
+    <aside class="controls">
+      <div style="display:grid;gap:10px">
+        <label class="small">목적 포맷 선택</label>
+        <select id="targetFormat" class="select">
+          <optgroup label="이미지">
+            <option value="webp">WebP (이미지)</option>
+            <option value="jpeg">JPEG (이미지)</option>
+            <option value="png">PNG (이미지)</option>
+          </optgroup>
+          <optgroup label="오디오 / 영상">
+            <option value="mp3">MP3 (오디오)</option>
+            <option value="wav">WAV (오디오)</option>
+            <option value="mp4">MP4 (영상)</option>
+            <option value="gif">GIF (짧은 영상)</option>
+          </optgroup>
+          <optgroup label="문서 / 기타">
+            <option value="pdf">PDF (문서)</option>
+            <option value="zip">ZIP (압축)</option>
+            <option value="txt">TXT (텍스트 인코딩)</option>
+          </optgroup>
+        </select>
+
+        <div style="display:flex;gap:8px">
+          <input id="fileInput" type="file" multiple style="display:none">
+          <button onclick="document.getElementById('fileInput').click()">파일 선택</button>
+          <button class="primary" id="convertBtn">변환 시작</button>
+        </div>
+
+        <div>
+          <label class="small">이미지 퀄리티 (JPEG/WebP)</label>
+          <input id="quality" type="range" min="10" max="100" value="85">
+        </div>
+
+        <div>
+          <label class="small">출력 파일 이름 패턴</label>
+          <input id="namePattern" type="text" placeholder="{orig}_converted" value="{orig}_converted">
+        </div>
+
+        <div>
+          <label class="small">진행</label>
+          <div class="progress"><i id="progressBar"></i></div>
+        </div>
+
+        <div id="log" class="small" style="height:90px;overflow:auto;border:1px solid #f0f0f0;padding:8px;border-radius:8px;background:#fafafa"></div>
+      </div>
+    </aside>
+  </section>
+
+  <section class="features card" style="margin-top:16px">
+    <div style="display:flex;justify-content:space-between;align-items:center">
+      <h3>지원 기능</h3>
+      <div class="small">클라이언트에서 가능/서버 연동 옵션 포함</div>
+    </div>
+    <div class="features" style="margin-top:12px">
+      <div class="feature"><img src="https://img.icons8.com/ios/50/picture.png"/>이미지 변환 · 리사이즈 · 품질 조절</div>
+      <div class="feature"><img src="https://img.icons8.com/ios/50/video.png"/>영상 변환 (ffmpeg.wasm)</div>
+      <div class="feature"><img src="https://img.icons8.com/ios/50/musical-notes.png"/>오디오 변환 (mp3/wav)</div>
+      <div class="feature"><img src="https://img.icons8.com/ios/50/document.png"/>문서 → PDF (텍스트/이미지)</div>
+      <div class="feature"><img src="https://img.icons8.com/ios/50/zip.png"/>ZIP 압축/해제 (JSZip)</div>
+      <div class="feature"><img src="https://img.icons8.com/ios/50/txt.png"/>텍스트 인코딩 변환</div>
+    </div>
+  </section>
+
+  <div class="footer">MULID © 2025 — 클라이언트 우선 동작. 대용량 파일/고성능 변환은 서버 연동 권장.</div>
+</main>
+
+<script>
+// 유틸
+const $ = id => document.getElementById(id);
+const log = msg => { const el = $('log'); el.innerHTML += `<div>${msg}</div>`; el.scrollTop = el.scrollHeight; }
+const setProgress = (p)=>{$('progressBar').style.width = Math.max(0,Math.min(100,p))+'%'}
+
+// 드래그 & 파일 선택
+const dropArea = $('dropArea');
+let files = [];
+
+['dragenter','dragover','dragleave','drop'].forEach(ev=>dropArea.addEventListener(ev, e=>{e.preventDefault();e.stopPropagation();}))
+
+dropArea.addEventListener('drop', e=>{
+  const dt = e.dataTransfer; handleNewFiles(dt.files);
+})
+
+dropArea.addEventListener('click', ()=>$('fileInput').click())
+$('fileInput').addEventListener('change', e=>handleNewFiles(e.target.files))
+
+function handleNewFiles(fileList){
+  const arr = Array.from(fileList);
+  files = files.concat(arr);
+  log(`${arr.length}개 파일 추가됨`);
+  $('dropText').innerText = `${files.length}개 파일 준비됨`;
+}
+
+// 변환 버튼
+$('convertBtn').addEventListener('click', startConvert)
+
+async function startConvert(){
+  if(!files.length){ alert('파일을 선택해주세요.'); return; }
+  const target = $('targetFormat').value;
+  const quality = parseInt($('quality').value,10)/100;
+  const namePattern = $('namePattern').value || '{orig}_converted';
+
+  setProgress(0); log('변환 시작...');
+
+  for(let i=0;i<files.length;i++){
+    const f = files[i];
+    const baseName = f.name.replace(/\.[^.]+$/,'');
+    const outName = namePattern.replace('{orig}', baseName);
+
+    try{
+      if(f.type.startsWith('image/')){
+        await convertImage(f,target,quality,outName);
+      } else if(f.type.startsWith('video/') || f.type.startsWith('audio/')){
+        await convertMediaWithFFMPEG(f,target,outName);
+      } else if(f.name.match(/\.zip$/i) || target==='zip'){
+        await handleZip(f,target,outName);
+      } else if(f.type.startsWith('text/') || f.name.match(/\.(txt|md)$/i)){
+        await convertText(f,target,outName);
+      } else {
+        log(`지원하지 않는 형식: ${f.name}`);
+      }
+    }catch(err){ log('오류: '+err.message) }
+
+    setProgress(Math.round(((i+1)/files.length)*100));
+  }
+
+  log('모든 작업 완료');
+  files = [];
+  $('dropText').innerText = '파일을 끌어다 놓거나 클릭하여 선택하세요';
+}
+
+// 이미지 변환 (Canvas)
+async function convertImage(file,target,quality,outBase){
+  return new Promise((res,rej)=>{
+    const reader = new FileReader();
+    reader.onload = e=>{
+      const img = new Image();
+      img.onload = ()=>{
+        const canvas = document.createElement('canvas');
+        canvas.width = img.width; canvas.height = img.height;
+        const ctx = canvas.getContext('2d'); ctx.drawImage(img,0,0);
+        let mime = 'image/webp';
+        if(target==='jpeg') mime='image/jpeg';
+        if(target==='png') mime='image/png';
+        canvas.toBlob(blob=>{
+          const ext = mime.split('/')[1].replace('jpeg','jpg');
+          downloadBlob(blob, `${outBase}.${ext}`);
+          log(`${file.name} → ${outBase}.${ext}`);
+          res();
+        }, mime, quality);
+      }
+      img.onerror = rej; img.src = e.target.result;
+    }
+    reader.onerror = rej; reader.readAsDataURL(file);
+  })
+}
+
+// JSZip (압축/해제)
+async function handleZip(file,target,outBase){
+  if(target==='zip' && !file.name.match(/\.zip$/i)){
+    // compress single file into zip
+    const zip = new JSZip();
+    const data = await file.arrayBuffer();
+    zip.file(file.name, data);
+    const content = await zip.generateAsync({type:'blob'});
+    downloadBlob(content, `${outBase}.zip`);
+    log(`${file.name} -> ${outBase}.zip`);
+  } else if(file.name.match(/\.zip$/i) && target!=='zip'){
+    // unzip
+    const zip = await JSZip.loadAsync(await file.arrayBuffer());
+    const entries = Object.keys(zip.files);
+    for(const name of entries){
+      const f = zip.files[name];
+      if(!f.dir){
+        const blob = await f.async('blob');
+        downloadBlob(blob, name);
+        log(`압축 해제: ${name}`);
+      }
+    }
+  }
+}
+
+// 텍스트 변환 (인코딩 단순 변환) — 여기선 UTF-8로 저장
+async function convertText(file,target,outBase){
+  const txt = await file.text();
+  if(target==='txt' || target==='pdf'){
+    if(target==='txt'){
+      const blob = new Blob([txt],{type:'text/plain;charset=utf-8'});
+      downloadBlob(blob, `${outBase}.txt`);
+      log(`${file.name} -> ${outBase}.txt`);
+    } else {
+      // pdf-lib 사용: 아주 기본 텍스트 -> 단일페이지 PDF
+      const { PDFDocument, StandardFonts } = PDFLib;
+      const pdfDoc = await PDFDocument.create();
+      const page = pdfDoc.addPage();
+      const font = await pdfDoc.embedFont(StandardFonts.Helvetica);
+      const size = 12; const pageWidth = page.getWidth();
+      page.drawText(txt.substring(0,3000), { x: 40, y: page.getHeight()-60, size, font });
+      const pdfBytes = await pdfDoc.save();
+      const blob = new Blob([pdfBytes], {type:'application/pdf'});
+      downloadBlob(blob, `${outBase}.pdf`);
+      log(`${file.name} -> ${outBase}.pdf`);
+    }
+  } else {
+    log('텍스트 변환 미지원 포맷: '+target);
+  }
+}
+
+// ffmpeg.wasm 기반 미디어 변환 (영상/오디오)
+async function convertMediaWithFFMPEG(file,target,outBase){
+  // ffmpeg 로딩 검사
+  if(!window.FFmpeg){
+    log('FFmpeg 로더 검사...');
+  }
+  try{
+    const { createFFmpeg, fetchFile } = FFmpeg;
+    const ffmpeg = createFFmpeg({ log: false });
+    if(!ffmpeg.isLoaded()){ log('FFmpeg 로딩 중... (초기 로딩은 시간이 걸립니다)'); await ffmpeg.load(); }
+
+    const inName = file.name;
+    await ffmpeg.FS('writeFile', inName, await fetchFile(file));
+
+    let outExt = target;
+    if(target==='mp3' || target==='wav' || target==='mp4' || target==='gif'){
+      const outName = `${outBase}.${outExt}`;
+      // 예시 변환 명령 (간단한 기본값)
+      if(target==='mp3'){
+        await ffmpeg.run('-i', inName, '-vn', '-b:a', '192k', outName);
+      } else if(target==='wav'){
+        await ffmpeg.run('-i', inName, '-vn', outName);
+      } else if(target==='mp4'){
+        await ffmpeg.run('-i', inName, '-c:v', 'libx264', '-crf', '23', '-preset','veryfast', outName);
+      } else if(target==='gif'){
+        await ffmpeg.run('-i', inName, '-vf', 'fps=10,scale=320:-1:flags=lanczos', '-loop', '0', outName);
+      }
+      const data = ffmpeg.FS('readFile', outName);
+      const blob = new Blob([data.buffer], {type: mimeForExt(outExt)});
+      downloadBlob(blob, outName);
+      log(`${inName} -> ${outName}`);
+    } else {
+      log('FFmpeg: 목표 포맷 미지원: '+target);
+    }
+
+    // cleanup
+    try{ ffmpeg.FS('unlink', inName); }catch(e){}
+  }catch(err){ log('FFmpeg 에러: '+err.message); throw err }
+}
+
+function mimeForExt(ext){
+  const map = {mp3:'audio/mpeg',wav:'audio/wav',mp4:'video/mp4',gif:'image/gif'};
+  return map[ext]||'application/octet-stream';
+}
+
+function downloadBlob(blob, filename){
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = filename;
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(()=>URL.revokeObjectURL(a.href), 60000);
+}
+
+</script>
 </body>
 </html>
