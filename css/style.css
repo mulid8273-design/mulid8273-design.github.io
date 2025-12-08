@@ -1,135 +1,174 @@
-/* 기본 설정 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Pretendard', sans-serif;
+/* -----------------------------------------------------
+   Premium MULID UI Theme
+   Light mode • Modern • Glassmorphism • Smooth UI
+----------------------------------------------------- */
+
+:root {
+    --bg: #f4f7fb;
+    --card-bg: #ffffffcc;
+    --text: #1d1d1f;
+    --accent: #4a7afe;
+    --accent-light: #e0e7ff;
+    --border: #e2e8f0;
 }
 
 body {
-    background: #111;
-    color: white;
-    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Pretendard', 'Segoe UI', sans-serif;
+    animation: fadeIn 0.8s ease-out;
+}
+
+/* Fade Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(5px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 /* Navbar */
-nav {
-    width: 100%;
-    background: #1a1a1a;
-    padding: 15px 20px;
+.navbar {
+    backdrop-filter: blur(12px);
+    background: #ffffffc9;
+    border-bottom: 1px solid var(--border);
+    padding: 15px 30px;
     display: flex;
-    gap: 20px;
-    border-bottom: 1px solid #333;
+    justify-content: space-between;
+    align-items: center;
     position: sticky;
     top: 0;
-    z-index: 1000;
+    z-index: 100;
 }
 
-nav a {
-    color: #ddd;
+.navbar .logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: var(--accent);
     text-decoration: none;
-    font-size: 16px;
-    font-weight: 500;
 }
 
-nav a:hover {
+.navbar nav a {
+    margin-left: 18px;
+    text-decoration: none;
+    color: var(--text);
+    font-size: 15px;
+    transition: 0.15s;
+}
+
+.navbar nav a:hover {
+    color: var(--accent);
+}
+
+/* Hero Section */
+.hero {
+    text-align: center;
+    padding: 90px 20px 70px;
+}
+
+.hero h1 {
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.hero p {
+    font-size: 18px;
+    color: #555;
+}
+
+/* Buttons */
+.btn {
+    display: inline-block;
+    padding: 14px 28px;
+    margin: 10px;
+    background: var(--accent);
     color: #fff;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: 600;
+    box-shadow: 0 4px 14px #4a7afe55;
+    transition: 0.2s;
 }
 
-/* Main layout */
-main {
-    max-width: 900px;
+.btn:hover {
+    background: #2e62ff;
+}
+
+.btn.secondary {
+    background: #ffffffaa;
+    color: var(--accent);
+    border: 1px solid var(--accent-light);
+    box-shadow: none;
+}
+
+.btn.secondary:hover {
+    background: var(--accent-light);
+}
+
+/* Cards (공통 UI 박스) */
+.card {
+    background: var(--card-bg);
+    backdrop-filter: blur(14px);
+    border-radius: 18px;
+    padding: 25px 30px;
     margin: 30px auto;
-    padding: 20px;
-    background: #1b1b1b;
-    border-radius: 10px;
-    border: 1px solid #333;
+    max-width: 700px;
+    box-shadow: 0 8px 25px #00000015;
+    border: 1px solid #ffffff55;
+    animation: fadeIn 0.7s ease-out;
 }
 
-/* Title */
-h1, h2 {
+/* Inputs */
+input[type="file"], select {
+    width: 100%;
+    padding: 14px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
     margin-bottom: 20px;
-    color: #fff;
+    font-size: 15px;
+    background: #fff;
 }
 
-/* 버튼 디자인 */
 button {
-    padding: 12px 20px;
-    background: #4e8cff;
+    width: 100%;
+    padding: 14px;
     border: none;
-    border-radius: 8px;
-    color: white;
+    background: var(--accent);
+    color: #fff;
     font-size: 16px;
+    border-radius: 12px;
     cursor: pointer;
-    margin-top: 15px;
+    transition: 0.2s;
 }
 
 button:hover {
-    background: #3b6bd6;
+    background: #2e62ff;
 }
 
-/* 파일 업로드 */
-input[type="file"] {
-    margin-top: 15px;
-    background: #222;
-    padding: 10px;
-    border-radius: 6px;
-    width: 100%;
-    color: #aaa;
-    border: 1px solid #333;
+/* FAQ */
+.faq-box h3 {
+    font-size: 19px;
+    margin-top: 20px;
 }
 
-input[type="file"]::-webkit-file-upload-button {
-    background: #444;
-    color: white;
-    padding: 8px 12px;
-    border: none;
-    border-radius: 6px;
-    cursor: pointer;
-}
-
-input[type="file"]::-webkit-file-upload-button:hover {
-    background: #555;
-}
-
-/* 광고 박스 */
-.ad-container {
-    margin: 20px 0;
-    padding: 15px;
-    background: #1f1f1f;
-    border-radius: 10px;
-    border: 1px solid #333;
-    display: flex;
-    justify-content: center;
+.faq-box p {
+    margin: 6px 0 16px;
+    color: #555;
 }
 
 /* Footer */
 footer {
     text-align: center;
-    padding: 20px;
-    color: #999;
+    padding: 40px;
+    color: #777;
+    margin-top: 40px;
     font-size: 14px;
-    margin-top: 50px;
 }
 
-/* 카드 레이아웃 */
-.card {
-    background: #222;
-    padding: 20px;
-    border-radius: 10px;
-    border: 1px solid #333;
-    margin: 20px 0;
-}
-
-/* Mobile responsive */
-@media (max-width: 600px) {
-    nav {
-        flex-wrap: wrap;
-        gap: 12px;
-    }
-
-    main {
-        margin: 15px;
-        padding: 15px;
-    }
+/* Ad Box */
+.ads-section, ins.adsbygoogle {
+    display: block;
+    max-width: 700px;
+    margin: 30px auto;
 }
