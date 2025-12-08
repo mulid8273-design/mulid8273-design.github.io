@@ -1,41 +1,35 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<title>파일 변환 - MULID</title>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="icon" href="favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="css/style.css">
-
-<script defer src="js/main.js"></script>
-<script defer src="js/pdf.js"></script>
-
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6998063928409116"
-     crossorigin="anonymous"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>문서 변환 — MULID</title>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6998063928409116" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="css/style.css" />
 </head>
-
 <body>
+<header class="nav">
+<div class="logo">MULID</div>
+<nav>
+<a href="index.html">Home</a>
+<a href="convert-image.html">이미지 변환</a>
+<a href="convert-video.html">영상 변환</a>
+</nav>
+</header>
 
-<h1>파일 변환</h1>
 
-<!-- 광고 -->
-<ins class="adsbygoogle"
-     style="display:block;"
-     data-ad-client="ca-pub-6998063928409116"
-     data-ad-slot="3333333333"
-     data-ad-format="auto"
-     data-full-width-responsive="true"></ins>
-<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-
-<input type="file" id="fileInput">
-<select id="formatSelect">
-    <option value="pdf">PDF</option>
-    <option value="txt">TXT</option>
+<section class="tool-container">
+<h2>PDF / 문서 변환</h2>
+<input type="file" id="fileInput" />
+<select id="fileFormat">
+<option value="pdf">PDF</option>
+<option value="txt">TXT</option>
 </select>
-<button onclick="convertPDF()">변환</button>
+<button class="btn" onclick="convertFile()">변환하기</button>
+</section>
 
-<div id="resultFile"></div>
 
+<footer>© 2025 MULID Platform</footer>
+<script src="js/pdf.js"></script>
 </body>
 </html>
