@@ -1,6 +1,5 @@
-// main.js — MULID 공통 스크립트
-
-console.log("main.js loaded");
+// MULID 사이트 공통 스크립트
+console.log("main.js loaded successfully");
 
 // Google Adsense 자동 로드
 function loadGoogleAds() {
