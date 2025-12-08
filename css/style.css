@@ -1,67 +1,68 @@
-* {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+}
+
+
+.container {
 display: flex;
-justify-content: space-between;
-padding: 18px 8%;
-background: #fff;
-border-bottom: 1px solid #ddd;
-position: sticky;
-top: 0;
-z-index: 100;
+justify-content: center;
+padding: 20px;
 }
 
 
-.logo {
-font-size: 24px;
-font-weight: 700;
-}
-
-
-nav a {
-margin-left: 20px;
-text-decoration: none;
-color: #333;
-font-weight: 500;
-}
-
-
-.hero {
-text-align: center;
-padding: 120px 20px;
-background: linear-gradient(135deg, #a8c0ff, #3f2b96);
-color: #fff;
-}
-
-
-.btn {
-padding: 12px 22px;
-background: #4c6ef5;
-color: #fff;
-border-radius: 10px;
-text-decoration: none;
-display: inline-block;
-margin: 10px;
-font-weight: 600;
-}
-
-
-.secondary {
-background: #748ffc;
-}
-
-
-.tool-container {
-max-width: 600px;
-margin: 60px auto;
-text-align: center;
-padding: 40px;
-background: #fff;
+.converter-card {
+background: rgba(255,255,255,0.05);
+padding: 30px;
 border-radius: 20px;
-box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+width: 100%;
+max-width: 500px;
+backdrop-filter: blur(10px);
+box-shadow: 0 8px 20px rgba(0,0,0,0.4);
 }
 
 
-footer {
+.upload-box {
+border: 2px dashed rgba(255,255,255,0.4);
+padding: 50px 20px;
 text-align: center;
-padding: 30px 0;
-margin-top: 80px;
+margin-top: 20px;
+border-radius: 15px;
+transition: 0.3s;
 }
+
+
+.upload-box:hover {
+border-color: #7bcffe;
+background: rgba(255,255,255,0.03);
+}
+
+
+input[type="file"] {
+display: none;
+}
+
+
+.format-section {
+margin-top: 20px;
+font-size: 16px;
+}
+
+
+select {
+margin-top: 10px;
+padding: 10px;
+border-radius: 10px;
+border: none;
+width: 100%;
+}
+
+
+.convert-btn {
+margin-top: 30px;
+width: 100%;
+padding: 15px;
+background: linear-gradient(90deg, #7bcffe, #a98bff);
+border: none;
+border-radius: 12px;
+font-size: 18px;
+color: #111;
+cursor:
