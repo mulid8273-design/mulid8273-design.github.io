@@ -1,174 +1,67 @@
-/* -----------------------------------------------------
-   Premium MULID UI Theme
-   Light mode • Modern • Glassmorphism • Smooth UI
------------------------------------------------------ */
-
-:root {
-    --bg: #f4f7fb;
-    --card-bg: #ffffffcc;
-    --text: #1d1d1f;
-    --accent: #4a7afe;
-    --accent-light: #e0e7ff;
-    --border: #e2e8f0;
+* {
+display: flex;
+justify-content: space-between;
+padding: 18px 8%;
+background: #fff;
+border-bottom: 1px solid #ddd;
+position: sticky;
+top: 0;
+z-index: 100;
 }
 
-body {
-    margin: 0;
-    padding: 0;
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Pretendard', 'Segoe UI', sans-serif;
-    animation: fadeIn 0.8s ease-out;
+
+.logo {
+font-size: 24px;
+font-weight: 700;
 }
 
-/* Fade Animation */
-@keyframes fadeIn {
-    from { opacity: 0; transform: translateY(5px); }
-    to { opacity: 1; transform: translateY(0); }
+
+nav a {
+margin-left: 20px;
+text-decoration: none;
+color: #333;
+font-weight: 500;
 }
 
-/* Navbar */
-.navbar {
-    backdrop-filter: blur(12px);
-    background: #ffffffc9;
-    border-bottom: 1px solid var(--border);
-    padding: 15px 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
 
-.navbar .logo {
-    font-size: 24px;
-    font-weight: bold;
-    color: var(--accent);
-    text-decoration: none;
-}
-
-.navbar nav a {
-    margin-left: 18px;
-    text-decoration: none;
-    color: var(--text);
-    font-size: 15px;
-    transition: 0.15s;
-}
-
-.navbar nav a:hover {
-    color: var(--accent);
-}
-
-/* Hero Section */
 .hero {
-    text-align: center;
-    padding: 90px 20px 70px;
+text-align: center;
+padding: 120px 20px;
+background: linear-gradient(135deg, #a8c0ff, #3f2b96);
+color: #fff;
 }
 
-.hero h1 {
-    font-size: 42px;
-    font-weight: 700;
-    margin-bottom: 15px;
-}
 
-.hero p {
-    font-size: 18px;
-    color: #555;
-}
-
-/* Buttons */
 .btn {
-    display: inline-block;
-    padding: 14px 28px;
-    margin: 10px;
-    background: var(--accent);
-    color: #fff;
-    border-radius: 12px;
-    text-decoration: none;
-    font-weight: 600;
-    box-shadow: 0 4px 14px #4a7afe55;
-    transition: 0.2s;
+padding: 12px 22px;
+background: #4c6ef5;
+color: #fff;
+border-radius: 10px;
+text-decoration: none;
+display: inline-block;
+margin: 10px;
+font-weight: 600;
 }
 
-.btn:hover {
-    background: #2e62ff;
+
+.secondary {
+background: #748ffc;
 }
 
-.btn.secondary {
-    background: #ffffffaa;
-    color: var(--accent);
-    border: 1px solid var(--accent-light);
-    box-shadow: none;
+
+.tool-container {
+max-width: 600px;
+margin: 60px auto;
+text-align: center;
+padding: 40px;
+background: #fff;
+border-radius: 20px;
+box-shadow: 0 4px 20px rgba(0,0,0,0.08);
 }
 
-.btn.secondary:hover {
-    background: var(--accent-light);
-}
 
-/* Cards (공통 UI 박스) */
-.card {
-    background: var(--card-bg);
-    backdrop-filter: blur(14px);
-    border-radius: 18px;
-    padding: 25px 30px;
-    margin: 30px auto;
-    max-width: 700px;
-    box-shadow: 0 8px 25px #00000015;
-    border: 1px solid #ffffff55;
-    animation: fadeIn 0.7s ease-out;
-}
-
-/* Inputs */
-input[type="file"], select {
-    width: 100%;
-    padding: 14px;
-    border-radius: 12px;
-    border: 1px solid var(--border);
-    margin-bottom: 20px;
-    font-size: 15px;
-    background: #fff;
-}
-
-button {
-    width: 100%;
-    padding: 14px;
-    border: none;
-    background: var(--accent);
-    color: #fff;
-    font-size: 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: 0.2s;
-}
-
-button:hover {
-    background: #2e62ff;
-}
-
-/* FAQ */
-.faq-box h3 {
-    font-size: 19px;
-    margin-top: 20px;
-}
-
-.faq-box p {
-    margin: 6px 0 16px;
-    color: #555;
-}
-
-/* Footer */
 footer {
-    text-align: center;
-    padding: 40px;
-    color: #777;
-    margin-top: 40px;
-    font-size: 14px;
-}
-
-/* Ad Box */
-.ads-section, ins.adsbygoogle {
-    display: block;
-    max-width: 700px;
-    margin: 30px auto;
+text-align: center;
+padding: 30px 0;
+margin-top: 80px;
 }
