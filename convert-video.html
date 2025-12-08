@@ -1,55 +1,69 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>영상 변환 · MULID</title>
-  <link rel="stylesheet" href="css/style.css" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>영상 변환 - MULID</title>
+
+    <link rel="stylesheet" href="css/style.css" />
+    <link rel="icon" href="favicon.ico" />
 </head>
+
 <body>
 
-<!-- 광고 자동 삽입 -->
-<div id="adsense-area"></div>
-<script>
-fetch("adsense.html")
-  .then(res => res.text())
-  .then(html => { document.getElementById("adsense-area").innerHTML = html; });
-</script>
+<header class="navbar">
+    <a href="index.html" class="logo">MULID</a>
+    <nav>
+        <a href="convert-image.html">이미지 변환</a>
+        <a href="convert-video.html" class="active">영상 변환</a>
+        <a href="convert-file.html">파일 변환</a>
+        <a href="faq.html">FAQ</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+</header>
 
-<nav>
-  <a href="index.html">홈</a>
-  <a href="convert-image.html">이미지</a>
-  <a href="convert-video.html" class="active">영상</a>
-  <a href="convert-file.html">파일</a>
-  <a href="faq.html">FAQ</a>
-  <a href="contact.html">문의</a>
-</nav>
+<section class="page-header">
+    <h1>영상 변환 도구</h1>
+    <p>MP4, WEBM, MOV 등 다양한 영상 포맷으로 변환하세요.</p>
+</section>
 
-<main>
-  <h1>영상 변환</h1>
+<section class="ads-section">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-6998063928409116"
+         data-ad-slot="1234567890"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+</section>
 
-  <section class="card">
-    <input id="videoInput" type="file" accept="video/*" />
-    <div style="margin-top:10px;">
-      <select id="videoFormat">
+<section class="converter-box">
+    <h2>영상 파일 선택</h2>
+    <input type="file" id="videoInput" accept="video/*" />
+
+    <label>변환할 형식 선택</label>
+    <select id="videoFormat">
         <option value="mp4">MP4</option>
         <option value="webm">WEBM</option>
-        <option value="gif">GIF</option>
-      </select>
-      <button id="videoConvertBtn">변환</button>
-    </div>
-    <div id="videoResult" style="margin-top:14px;">변환 결과가 여기 표시됩니다.</div>
-  </section>
-</main>
+    </select>
+
+    <button id="convertVideoBtn" class="btn">변환하기</button>
+
+    <a id="downloadVideo" class="btn secondary" style="display:none;">변환된 영상 다운로드</a>
+</section>
+
+<section class="ads-section">
+    <div class="adpost_unit" data-adpost-unit="mulid827"></div>
+</section>
 
 <footer>
-  <p>© 2025 MULID</p>
+    <p>© 2025 MULID — All rights reserved.</p>
 </footer>
 
-<!-- FFmpeg CDN -->
-<script src="https://unpkg.com/@ffmpeg/ffmpeg@0.10.0/dist/ffmpeg.min.js"></script>
-
-<script src="js/main.js"></script>
 <script src="js/video.js"></script>
+<script src="js/main.js"></script>
+
 </body>
 </html>
