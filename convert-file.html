@@ -1,70 +1,38 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>파일 변환 - MULID</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PDF/문서 변환 - MULID</title>
 
-    <link rel="stylesheet" href="css/style.css" />
-    <link rel="icon" href="favicon.ico" />
+<!-- Google Adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6998063928409116"
+     crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="css/style.css">
+<script src="js/pdf.js" defer></script>
 </head>
 
 <body>
 
-<header class="navbar">
-    <a href="index.html" class="logo">MULID</a>
-    <nav>
-        <a href="convert-image.html">이미지 변환</a>
-        <a href="convert-video.html">영상 변환</a>
-        <a href="convert-file.html" class="active">파일 변환</a>
-        <a href="faq.html">FAQ</a>
-        <a href="contact.html">Contact</a>
-    </nav>
-</header>
+<h2>PDF / 문서 변환</h2>
 
-<section class="page-header">
-    <h1>PDF · 문서 변환 도구</h1>
-    <p>PDF / TXT / DOCX / 이미지 등 다양한 파일 변환을 제공합니다.</p>
-</section>
+<div class="upload-box">
+  <input type="file" id="fileInput">
+  <button id="convertFileBtn">변환하기</button>
+</div>
 
-<section class="ads-section">
-    <ins class="adsbygoogle"
-         style="display:block"
-         data-ad-client="ca-pub-6998063928409116"
-         data-ad-slot="1234567890"
-         data-ad-format="auto"
-         data-full-width-responsive="true"></ins>
-    <script>
-        (adsbygoogle = window.adsbygoogle || []).push({});
-    </script>
-</section>
+<div class="result" id="fileResult"></div>
 
-<section class="converter-box">
-    <h2>파일 선택</h2>
-    <input type="file" id="fileInput" />
-
-    <label>변환 형식</label>
-    <select id="fileFormat">
-        <option value="pdf">PDF</option>
-        <option value="txt">TXT</option>
-        <option value="png">PNG</option>
-    </select>
-
-    <button id="convertFileBtn" class="btn">변환하기</button>
-
-    <a id="downloadFile" class="btn secondary" style="display:none;">변환된 파일 다운로드</a>
-</section>
-
-<section class="ads-section">
-    <div class="adpost_unit" data-adpost-unit="mulid827"></div>
-</section>
-
-<footer>
-    <p>© 2025 MULID — All rights reserved.</p>
-</footer>
-
-<script src="js/pdf.js"></script>
-<script src="js/main.js"></script>
+<!-- 광고 -->
+<div class="ad-section">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-6998063928409116"
+       data-ad-slot="3004005003"
+       data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
 </body>
 </html>
