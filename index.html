@@ -3,52 +3,217 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MULID 변환 사이트</title>
-<link rel="stylesheet" href="styles.css" />
+<title>MULID 변환 서비스</title>
+
+<style>
+/* ===== 기본 ===== */
+body {
+    margin: 0;
+    font-family: 'Inter', 'Pretendard', sans-serif;
+    background: linear-gradient(135deg, #0C0F18, #1A1F2C);
+    color: white;
+}
+
+/* ===== 네비게이션 ===== */
+nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 18px 40px;
+    backdrop-filter: blur(14px);
+    background: rgba(255,255,255,0.05);
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+nav .logo {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 24px;
+    padding: 0;
+    margin: 0;
+}
+
+nav li {
+    cursor: pointer;
+    opacity: 0.8;
+    transition: 0.2s;
+}
+nav li:hover {
+    opacity: 1;
+}
+
+
+/* ===== 히어로 섹션 ===== */
+.hero {
+    text-align: center;
+    padding: 100px 20px 60px 20px;
+}
+
+.hero h1 {
+    font-size: 44px;
+    font-weight: 800;
+}
+.hero p {
+    margin-top: 12px;
+    font-size: 18px;
+    opacity: 0.8;
+}
+
+/* ===== 업로드 박스 ===== */
+.upload-box {
+    width: 80%;
+    max-width: 680px;
+    margin: 40px auto;
+    padding: 50px 30px;
+    border-radius: 24px;
+    border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(20px);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.upload-box:hover {
+    background: rgba(255,255,255,0.10);
+}
+
+.upload-box input {
+    display: none;
+}
+
+.upload-box label {
+    cursor: pointer;
+    display: inline-block;
+    padding: 14px 28px;
+    margin-top: 20px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 12px;
+    transition: 0.2s;
+}
+
+.upload-box label:hover {
+    background: rgba(255,255,255,0.25);
+}
+
+/* ===== 변환 버튼 ===== */
+.convert-btn {
+    margin-top: 30px;
+    padding: 16px 42px;
+    background: linear-gradient(135deg, #6D5BFF, #8D79FF);
+    border: none;
+    border-radius: 14px;
+    font-size: 18px;
+    color: #fff;
+    cursor: pointer;
+    transition: 0.25s;
+    transform: translateY(0);
+}
+.convert-btn:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(120,100,255,0.4);
+}
+
+/* ===== 기능 리스트 ===== */
+.features {
+    padding: 80px 20px;
+    text-align: center;
+}
+
+.features h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+}
+
+.feature-boxes {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.feature-card {
+    width: 260px;
+    padding: 28px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(12px);
+    transition: 0.25s;
+}
+
+.feature-card:hover {
+    background: rgba(255,255,255,0.12);
+    transform: translateY(-6px);
+}
+
+/* ===== 푸터 ===== */
+footer {
+    padding: 40px 20px;
+    text-align: center;
+    opacity: 0.5;
+    font-size: 14px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+</style>
+
+<script>
+function convertFile() {
+    alert("변환이 실행되었습니다! (여기에 실제 변환 코드를 연결)");
+}
+</script>
+
 </head>
 <body>
-<header class="header">
-<h1 class="logo">MULID 변환기</h1>
-<p class="tagline">이미지 · 영상 · 문서 · 오디오 모든 포맷 변환 지원</p>
-</header>
 
+<nav>
+    <div class="logo">MULID</div>
+    <ul>
+        <li>홈</li>
+        <li>변환 기능</li>
+        <li>도움말</li>
+    </ul>
+</nav>
 
-<main class="container">
-<section class="converter-card">
-<h2>파일 변환</h2>
-<p>지원 포맷: JPG, PNG, WEBP, MP4, WAV, MP3, PDF, TXT 외 20+</p>
-
-
-<div class="upload-box" id="drop-area">
-<p>파일을 여기로 드래그하거나 클릭하여 업로드</p>
-<input type="file" id="fileElem" accept="*/*" />
-</div>
-
-
-<div class="format-section">
-<label>변환할 포맷 선택:</label>
-<select id="formatSelect">
-<option value="jpg">JPG</option>
-<option value="png">PNG</option>
-<option value="webp">WEBP</option>
-<option value="mp4">MP4</option>
-<option value="mp3">MP3</option>
-<option value="wav">WAV</option>
-<option value="pdf">PDF</option>
-<option value="txt">TXT</option>
-</select>
-</div>
-
-
-<button id="convertBtn" class="convert-btn">변환 시작</button>
-
-
-<div id="result" class="result"></div>
+<section class="hero">
+    <h1>MULID 변환 서비스</h1>
+    <p>이미지 · 음원 · 문서 · 영상 무엇이든 쉽게 변환하세요</p>
 </section>
-</main>
 
+<div class="upload-box">
+    <h2>파일 업로드</h2>
+    <p>여기에 파일을 드래그하거나 선택하세요</p>
 
-<footer class="footer">© 2025 MULID — All Rights Reserved</footer>
-<script src="script.js"></script>
+    <input type="file" id="fileInput">
+    <label for="fileInput">파일 선택하기</label>
+
+    <br />
+    <button class="convert-btn" onclick="convertFile()">변환하기</button>
+</div>
+
+<section class="features">
+    <h2>지원하는 변환 기능</h2>
+
+    <div class="feature-boxes">
+        <div class="feature-card">이미지 → PNG/JPG/WebP</div>
+        <div class="feature-card">문서 → PDF 변환</div>
+        <div class="feature-card">오디오 → MP3/ WAV</div>
+        <div class="feature-card">영상 → MP4 변환</div>
+        <div class="feature-card">ZIP 압축/해제</div>
+        <div class="feature-card">텍스트 인코딩 변환</div>
+    </div>
+</section>
+
+<footer>
+    MULID © 2025. All rights reserved.
+</footer>
+
 </body>
 </html>
