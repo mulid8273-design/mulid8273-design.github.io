@@ -3,44 +3,44 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>MULID 변환 서비스</title>
+<title>MULID 변환 서비스 - Minimal Gray Noise</title>
 
 <style>
-/* ===== 기본 ===== */
+/* ===== Global ===== */
 body {
     margin: 0;
     font-family: 'Inter', 'Pretendard', sans-serif;
-    background: linear-gradient(135deg, #0C0F18, #1A1F2C);
-    color: white;
+    background: #f2f2f2;
+    color: #111;
+    /* Noise Texture */
+    background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAAEElEQVR42mP8/5+hHgAHggJ/lD1gVAAAAABJRU5ErkJggg==');
 }
 
-/* ===== 네비게이션 ===== */
+/* ===== Navigation ===== */
 nav {
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 18px 40px;
-    backdrop-filter: blur(14px);
-    background: rgba(255,255,255,0.05);
-    border-bottom: 1px solid rgba(255,255,255,0.08);
+    align-items: center;
+    padding: 16px 40px;
+    border-bottom: 1px solid #dcdcdc;
+    background: rgba(255,255,255,0.7);
+    backdrop-filter: blur(8px);
 }
-
 nav .logo {
-    font-size: 22px;
+    font-size: 20px;
     font-weight: 700;
-    letter-spacing: -0.5px;
 }
-
 nav ul {
     list-style: none;
     display: flex;
     gap: 24px;
-    padding: 0;
     margin: 0;
+    padding: 0;
 }
-
 nav li {
     cursor: pointer;
+    font-size: 15px;
     opacity: 0.8;
     transition: 0.2s;
 }
@@ -48,128 +48,167 @@ nav li:hover {
     opacity: 1;
 }
 
-
-/* ===== 히어로 섹션 ===== */
+/* ===== Hero ===== */
 .hero {
     text-align: center;
-    padding: 100px 20px 60px 20px;
+    padding: 70px 20px 40px 20px;
 }
-
 .hero h1 {
-    font-size: 44px;
-    font-weight: 800;
+    font-size: 34px;
+    font-weight: 700;
 }
 .hero p {
-    margin-top: 12px;
-    font-size: 18px;
-    opacity: 0.8;
+    color: #666;
+    font-size: 17px;
 }
 
-/* ===== 업로드 박스 ===== */
+/* ===== Upload Box ===== */
 .upload-box {
-    width: 80%;
-    max-width: 680px;
-    margin: 40px auto;
-    padding: 50px 30px;
-    border-radius: 24px;
-    border: 1px solid rgba(255,255,255,0.15);
-    background: rgba(255,255,255,0.06);
-    backdrop-filter: blur(20px);
+    width: 92%;
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 40px 30px;
+    border-radius: 16px;
+    border: 1px solid #d3d3d3;
+    background: rgba(255,255,255,0.8);
+    backdrop-filter: blur(6px);
     text-align: center;
-    transition: 0.3s;
+}
+.upload-icon {
+    width: 40px;
+    opacity: 0.5;
+    margin-bottom: 10px;
 }
 
-.upload-box:hover {
-    background: rgba(255,255,255,0.10);
-}
-
-.upload-box input {
-    display: none;
-}
+.upload-box input { display: none; }
 
 .upload-box label {
     cursor: pointer;
+    padding: 12px 24px;
+    border-radius: 10px;
+    background: #e4e4e4;
+    border: 1px solid #c9c9c9;
+    color: #111;
+    transition: 0.2s;
     display: inline-block;
-    padding: 14px 28px;
-    margin-top: 20px;
-    background: rgba(255,255,255,0.15);
-    border-radius: 12px;
+    font-size: 15px;
+}
+.upload-box label:hover {
+    background: #d8d8d8;
+}
+
+/* ===== Convert Button ===== */
+.convert-btn {
+    margin-top: 25px;
+    padding: 14px 40px;
+    font-size: 16px;
+    color: #fff;
+    background: #111;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
     transition: 0.2s;
 }
-
-.upload-box label:hover {
-    background: rgba(255,255,255,0.25);
-}
-
-/* ===== 변환 버튼 ===== */
-.convert-btn {
-    margin-top: 30px;
-    padding: 16px 42px;
-    background: linear-gradient(135deg, #6D5BFF, #8D79FF);
-    border: none;
-    border-radius: 14px;
-    font-size: 18px;
-    color: #fff;
-    cursor: pointer;
-    transition: 0.25s;
-    transform: translateY(0);
-}
 .convert-btn:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 10px 25px rgba(120,100,255,0.4);
+    background: #000;
 }
 
-/* ===== 기능 리스트 ===== */
+/* ===== Feature Section ===== */
 .features {
-    padding: 80px 20px;
+    padding: 70px 20px;
     text-align: center;
 }
-
 .features h2 {
-    font-size: 32px;
+    font-size: 28px;
+    font-weight: 700;
     margin-bottom: 20px;
 }
-
 .feature-boxes {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 16px;
     flex-wrap: wrap;
-    max-width: 1100px;
+    max-width: 900px;
     margin: auto;
 }
-
 .feature-card {
-    width: 260px;
-    padding: 28px;
-    border-radius: 18px;
-    background: rgba(255,255,255,0.05);
-    border: 1px solid rgba(255,255,255,0.1);
-    backdrop-filter: blur(12px);
-    transition: 0.25s;
+    width: 230px;
+    padding: 22px;
+    border-radius: 14px;
+    border: 1px solid #dbdbdb;
+    background: #fff;
+    font-size: 15px;
+}
+.feature-card img {
+    width: 32px;
+    margin-bottom: 10px;
+    opacity: 0.7;
 }
 
-.feature-card:hover {
-    background: rgba(255,255,255,0.12);
-    transform: translateY(-6px);
-}
-
-/* ===== 푸터 ===== */
+/* ===== Footer ===== */
 footer {
     padding: 40px 20px;
+    font-size: 13px;
+    color: #777;
     text-align: center;
-    opacity: 0.5;
-    font-size: 14px;
-    border-top: 1px solid rgba(255,255,255,0.1);
+    border-top: 1px solid #dcdcdc;
+}
+
+/* ===== Mobile Optimized ===== */
+@media (max-width: 600px) {
+    nav {
+        padding: 14px 20px;
+    }
+    nav ul {
+        gap: 14px;
+    }
+    .hero h1 {
+        font-size: 28px;
+    }
+    .upload-box {
+        padding: 30px 20px;
+    }
+    .feature-card {
+        width: 45%;
+    }
 }
 </style>
 
 <script>
+// ===== Basic Conversion Example (Client-side Image → WebP) =====
 function convertFile() {
-    alert("변환이 실행되었습니다! (여기에 실제 변환 코드를 연결)");
+    const fileInput = document.getElementById('fileInput').files[0];
+
+    if (!fileInput) {
+        alert("파일을 선택해주세요.");
+        return;
+    }
+
+    const reader = new FileReader();
+    reader.onload = function(event) {
+        const img = new Image();
+        img.src = event.target.result;
+
+        img.onload = function() {
+            const canvas = document.createElement('canvas');
+            canvas.width = img.width;
+            canvas.height = img.height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0);
+
+            // 이미지 → WebP 변환
+            canvas.toBlob(function(blob) {
+                const link = document.createElement('a');
+                link.href = URL.createObjectURL(blob);
+                link.download = 'converted.webp';
+                link.click();
+            }, 'image/webp');
+        };
+    };
+
+    reader.readAsDataURL(fileInput);
 }
 </script>
-
 </head>
 <body>
 
@@ -177,42 +216,60 @@ function convertFile() {
     <div class="logo">MULID</div>
     <ul>
         <li>홈</li>
-        <li>변환 기능</li>
+        <li>지원 변환</li>
         <li>도움말</li>
     </ul>
 </nav>
 
 <section class="hero">
-    <h1>MULID 변환 서비스</h1>
-    <p>이미지 · 음원 · 문서 · 영상 무엇이든 쉽게 변환하세요</p>
+    <h1>초간단 파일 변환</h1>
+    <p>라이트 그레이 + 노이즈 질감의 미니멀 디자인</p>
 </section>
 
 <div class="upload-box">
+    <img class="upload-icon" src="https://img.icons8.com/ios-glyphs/60/upload--v1.png" />
     <h2>파일 업로드</h2>
-    <p>여기에 파일을 드래그하거나 선택하세요</p>
+    <p>이미지 업로드 시 WebP로 변환됩니다</p>
 
-    <input type="file" id="fileInput">
-    <label for="fileInput">파일 선택하기</label>
+    <input type="file" id="fileInput" accept="image/*">
+    <label for="fileInput">파일 선택</label>
 
     <br />
     <button class="convert-btn" onclick="convertFile()">변환하기</button>
 </div>
 
 <section class="features">
-    <h2>지원하는 변환 기능</h2>
-
+    <h2>지원하는 기능</h2>
     <div class="feature-boxes">
-        <div class="feature-card">이미지 → PNG/JPG/WebP</div>
-        <div class="feature-card">문서 → PDF 변환</div>
-        <div class="feature-card">오디오 → MP3/ WAV</div>
-        <div class="feature-card">영상 → MP4 변환</div>
-        <div class="feature-card">ZIP 압축/해제</div>
-        <div class="feature-card">텍스트 인코딩 변환</div>
+        <div class="feature-card">
+            <img src="https://img.icons8.com/ios-glyphs/60/picture.png" />
+            이미지 변환
+        </div>
+        <div class="feature-card">
+            <img src="https://img.icons8.com/ios-glyphs/60/document.png" />
+            문서 → PDF
+        </div>
+        <div class="feature-card">
+            <img src="https://img.icons8.com/ios-glyphs/60/musical-notes.png" />
+            오디오 변환
+        </div>
+        <div class="feature-card">
+            <img src="https://img.icons8.com/ios-glyphs/60/video.png" />
+            영상 변환
+        </div>
+        <div class="feature-card">
+            <img src="https://img.icons8.com/ios-glyphs/60/zip.png" />
+            ZIP 압축/해제
+        </div>
+        <div class="feature-card">
+            <img src="https://img.icons8.com/ios-glyphs/60/txt.png" />
+            텍스트 변환
+        </div>
     </div>
 </section>
 
 <footer>
-    MULID © 2025. All rights reserved.
+    MULID © 2025. Minimal Gray Noise Converter
 </footer>
 
 </body>
