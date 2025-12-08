@@ -1,46 +1,34 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>FAQ · MULID</title>
-  <link rel="stylesheet" href="css/style.css" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ - MULID</title>
+
+<!-- Google Adsense -->
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6998063928409116"
+     crossorigin="anonymous"></script>
+
+<link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
 
-<!-- 광고 자동 삽입 -->
-<div id="adsense-area"></div>
-<script>
-fetch('/adsense.html')
-  .then(res => res.text())
-  .then(html => { document.getElementById('adsense-area').innerHTML = html; });
-</script>
+<h2>자주 묻는 질문</h2>
 
-<nav>
-  <a href="index.html">홈</a>
-  <a href="convert-image.html">이미지</a>
-  <a href="convert-video.html">영상</a>
-  <a href="convert-file.html">파일</a>
-  <a href="faq.html" class="active">FAQ</a>
-  <a href="contact.html">문의</a>
-</nav>
+<ul class="faq">
+  <li>Q: 파일이 서버에 저장되나요?<br>A: 저장되지 않습니다.</li>
+  <li>Q: 변환 속도는 어떤가요?<br>A: 브라우저 성능에 따라 결정됩니다.</li>
+</ul>
 
-<main>
-  <h1>자주 묻는 질문 (FAQ)</h1>
+<!-- 광고 -->
+<div class="ad-section">
+  <ins class="adsbygoogle"
+       style="display:block"
+       data-ad-client="ca-pub-6998063928409116"
+       data-ad-slot="4005006004"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+</div>
 
-  <section class="card">
-    <h3>Q. 변환은 무료인가요?</h3>
-    <p>A. 예, 모든 변환 기능은 무료입니다.</p>
-
-    <h3>Q. 파일은 서버에 저장되나요?</h3>
-    <p>A. 아니요. 모든 변환은 브라우저 내에서 이루어지며 서버에 업로드되지 않습니다 (GitHub Pages 사용 기준).</p>
-  </section>
-</main>
-
-<footer>
-  <p>© 2025 MULID</p>
-</footer>
-
-<script src="js/main.js"></script>
 </body>
 </html>
