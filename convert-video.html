@@ -1,38 +1,40 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
+<title>동영상 변환 - MULID</title>
+
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>영상 변환 - MULID</title>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="css/style.css">
 
-<!-- Google Adsense -->
+<script defer src="js/main.js"></script>
+<script defer src="js/video.js"></script>
+
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6998063928409116"
      crossorigin="anonymous"></script>
-
-<link rel="stylesheet" href="css/style.css">
-<script src="js/video.js" defer></script>
 </head>
 
 <body>
-
-<h2>영상 변환</h2>
-
-<div class="upload-box">
-  <input type="file" id="videoInput" accept="video/*">
-  <button id="convertVideoBtn">변환하기</button>
-</div>
-
-<div id="videoResult"></div>
+<h1>동영상 변환</h1>
 
 <!-- 광고 -->
-<div class="ad-section">
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-6998063928409116"
-       data-ad-slot="2003004002"
-       data-full-width-responsive="true"></ins>
-  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
-</div>
+<ins class="adsbygoogle"
+     style="display:block;"
+     data-ad-client="ca-pub-6998063928409116"
+     data-ad-slot="2222222222"
+     data-ad-format="auto"
+     data-full-width-responsive="true"></ins>
+<script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+
+<input type="file" id="videoInput">
+<select id="formatSelect">
+    <option value="mp4">MP4</option>
+    <option value="webm">WEBM</option>
+</select>
+<button onclick="convertVideo()">변환</button>
+
+<div id="resultVideo"></div>
 
 </body>
 </html>
