@@ -1,25 +1,28 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>이미지 변환</title>
-<link rel="stylesheet" href="../css/style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>MULID 변환 도구</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="noise-bg">
+<body>
+  <main class="wrap">
+    <header>
+      <h1>MULID 변환 도구</h1>
+      <p>음성/동영상 → 텍스트 · SRT · MP3 · 이미지 변환 등 통합 툴</p>
+    </header>
 
+    <nav class="cards">
+      <a class="card" href="audio-to-text.html">🎧 음성/동영상 → 텍스트</a>
+      <a class="card" href="youtube-to-sub.html">▶️ 유튜브 URL → 자막(SRT)</a>
+      <a class="card" href="video-to-mp3.html">🎵 영상 → MP3</a>
+      <a class="card" href="image-to-png.html">🖼 이미지 → PNG</a>
+    </nav>
 
-<header class="header">
-<h1>🖼 이미지 변환</h1>
-<a href="../index.html" class="tool-btn">← 홈으로</a>
-</header>
-
-
-<div class="tool-container">
-<a class="tool-btn" href="../convert-image.html">이미지 변환</a>
-<a class="tool-btn" href="../convert-file.html">파일 변환</a>
-</div>
-
-
+    <footer>
+      <small>서버 URL은 js 파일 안의 <code>SERVER_URL</code> 상수를 네 서버 주소로 바꿔 주세요.</small>
+    </footer>
+  </main>
 </body>
 </html>
