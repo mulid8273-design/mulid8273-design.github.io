@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>기타 도구 - MULID</title>
+    <link rel="stylesheet" href="../style.css" />
+    <script defer src="../app.js"></script>
+</head>
+
+<body>
+<header>
+    <h1>기타 파일 도구</h1>
+    <p class="subtitle">ZIP 압축 / 파일 병합 / 메타정보 추출</p>
+</header>
+
+<main class="tool-container">
+    <input type="file" id="fileInput" />
+    <select id="outputFormat">
+        <option value="zip">ZIP 압축</option>
+        <option value="meta">메타데이터 추출(JSON)</option>
+    </select>
+    <button id="convertBtn">실행</button>
+    <a id="downloadLink" style="display:none;">다운로드</a>
+</main>
+
+</body>
+</html>
