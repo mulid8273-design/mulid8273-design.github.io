@@ -1,20 +1,33 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>음성 → 텍스트 변환</title>
-  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>음성 / 동영상 → 텍스트 변환</h1>
+  <main class="wrap">
+    <h2>음성 / 동영상 → 텍스트</h2>
 
-    <input type="file" id="file" accept="audio/*,video/*" />
-    <button id="convertBtn">변환하기</button>
+    <section class="panel">
+      <label class="field">
+        <div>파일 업로드 (audio / video)</div>
+        <input id="file" type="file" accept="audio/*,video/*">
+      </label>
+      <button id="convertBtn">변환 시작</button>
+    </section>
 
-    <pre id="result"></pre>
-  </div>
+    <section class="panel">
+      <h3>결과</h3>
+      <pre id="result">결과가 여기에 표시됩니다.</pre>
+      <a id="downloadSrt" style="display:none" download="subtitles.srt">SRT 다운로드</a>
+    </section>
+
+    <section class="panel note">
+      <p>대용량 파일은 서버에서 처리되며, 처리 시간은 파일 크기에 따라 다릅니다.</p>
+    </section>
+  </main>
 
   <script src="js/audio-to-text.js"></script>
 </body>
