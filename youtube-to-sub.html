@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>유튜브 → 자막 (SRT)</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <main class="wrap">
+    <h2>유튜브 URL → 자동 자막(SRT)</h2>
+
+    <section class="panel">
+      <label class="field">
+        <div>유튜브 URL</div>
+        <input id="ytUrl" placeholder="https://www.youtube.com/watch?v=..." />
+      </label>
+      <button id="ytConvertBtn">변환 시작</button>
+    </section>
+
+    <section class="panel">
+      <h3>결과</h3>
+      <pre id="ytResult">결과가 여기에 표시됩니다.</pre>
+      <a id="ytDownloadSrt" style="display:none" download="youtube-subtitles.srt">SRT 다운로드</a>
+    </section>
+  </main>
+
+  <script src="js/youtube-to-sub.js"></script>
+</body>
+</html>
