@@ -1,59 +1,55 @@
-<!-- Full index.html with button and routing placeholder -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>MULID 변환 사이트</title>
-    <style>
-        body { font-family: Arial; background:#f2f2f2; margin:0; padding:20px; }
-        .tool-card { padding:20px; background:white; margin-bottom:10px; border-radius:12px; cursor:pointer; }
-    </style>
+    <title>MULID 변환 서비스</title>
+
+    <link rel="stylesheet" href="style.css" />
 </head>
+
 <body>
-    <h1>정통 변환 사이트</h1>
+    <header>
+        <h1>MULID 변환 서비스</h1>
+        <p class="subtitle">정통 프로페셔널 올인원 변환 플랫폼</p>
+    </header>
 
-    <!-- 기존 기능 영역 -->
-    <div class="tool-card" onclick="openTool('image-convert')">🖼 이미지 변환</div>
+    <main class="menu-wrapper">
 
-    <!-- 새 기능: 영상 → MP3 -->
-    <div class="tool-card" onclick="openTool('video-to-mp3')">🎵 영상 → MP3 변환</div>
+        <a href="routes/image.html" class="menu-card">
+            <h2>이미지 변환</h2>
+            <p>JPG / PNG / WEBP / GIF 변환</p>
+        </a>
 
-    <input id="fileInput" type="file" style="display:none" />
+        <a href="routes/audio.html" class="menu-card">
+            <h2>오디오 변환</h2>
+            <p>MP3 / WAV / FLAC / OGG</p>
+        </a>
 
-    <script>
-        function openTool(tool) {
-            const input = document.getElementById("fileInput");
-            input.onchange = () => {
-                const file = input.files[0];
-                if (!file) return;
-                if (tool === "video-to-mp3") convertVideoToMP3(file);
-            };
-            input.click();
-        }
+        <a href="routes/video.html" class="menu-card">
+            <h2>비디오 변환</h2>
+            <p>MP4 / MOV / AVI / WEBM</p>
+        </a>
 
-        async function convertVideoToMP3(file) {
-            const form = new FormData();
-            form.append("file", file);
+        <a href="routes/pdf.html" class="menu-card">
+            <h2>PDF 변환</h2>
+            <p>PDF ↔ 이미지, PDF 압축</p>
+        </a>
 
-            const res = await fetch("/api/convert/video-to-mp3", {
-                method: "POST",
-                body: form,
-            });
+        <a href="routes/text.html" class="menu-card">
+            <h2>문서 변환</h2>
+            <p>TXT / DOCX / MD / HTML</p>
+        </a>
 
-            if (!res.ok) {
-                alert("변환 실패!");
-                return;
-            }
+        <a href="routes/etc.html" class="menu-card">
+            <h2>기타 변환</h2>
+            <p>ZIP 압축 / 파일 병합 / 메타정보</p>
+        </a>
 
-            const blob = await res.blob();
-            const url = window.URL.createObjectURL(blob);
+    </main>
 
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = file.name.replace(/\.[^/.]+$/, "") + ".mp3";
-            a.click();
-        }
-    </script>
+    <footer>
+        <p>© 2025 MULID 변환 서비스</p>
+    </footer>
 </body>
 </html>
