@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>비디오 변환 - MULID</title>
+    <link rel="stylesheet" href="../style.css" />
+    <script defer src="../app.js"></script>
+</head>
+
+<body>
+<header>
+    <h1>비디오 변환</h1>
+    <p class="subtitle">MP4 / WEBM 변환기</p>
+</header>
+
+<main class="tool-container">
+    <input type="file" id="fileInput" accept="video/*" />
+    <select id="outputFormat">
+        <option value="mp4">MP4</option>
+        <option value="webm">WEBM</option>
+    </select>
+    <button id="convertBtn">변환하기</button>
+    <a id="downloadLink" style="display:none;">변환된 파일 다운로드</a>
+</main>
+
+</body>
+</html>
